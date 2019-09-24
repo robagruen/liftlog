@@ -6,3 +6,19 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+body {
+    background: $color-darkgray;
+}
+
+nav {
+    background: $color-lightgray;
+}
+
+#logo {
+    width: 106px;
+}
+
+a {
+    color: $color-fuchsia;
+}

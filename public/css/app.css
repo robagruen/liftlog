@@ -10644,3 +10644,19 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background: #333333;
+}
+
+nav {
+  background: rgba(102, 102, 102, 0.5);
+}
+
+#logo {
+  width: 106px;
+}
+
+a {
+  color: #E43F7E;
+}
+
