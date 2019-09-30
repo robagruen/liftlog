@@ -1,38 +1,30 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="">
-                LiftLog
-            </a>
-            <img src="/images/Logo.png" alt="">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div>
+        <md-tabs md-sync-route>
+            <md-tab id="tab-home" md-label="Home" to="/components/tabs" exact>
+                Home Tab
+            </md-tab>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul>
-                    <li><a href="#">Register</a></li>
-                    <li>Login</li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <md-tab id="tab-pages" md-label="Pages" to="/components/tabs/pages">
+                Pages tab
+                <p>Unde provident nemo reiciendis officia, possimus repellendus. Facere dignissimos dicta quis rem. Aliquam aspernatur dolor atque nisi id deserunt laudantium quam repellat.</p>
+            </md-tab>
+
+            <md-tab id="tab-posts" md-label="Posts" to="/components/tabs/posts">
+                Posts tab
+                <p>Qui, voluptas repellat impedit ducimus earum at ad architecto consectetur perferendis aspernatur iste amet ex tempora animi, illum tenetur quae assumenda iusto.</p>
+            </md-tab>
+
+            <md-tab id="tab-favorites" md-label="Favorites" to="/components/tabs/favorites">
+                Favorites tab
+                <p>Maiores, dolorum. Beatae, optio tempore fuga odit aperiam velit, consequuntur magni inventore sapiente alias sequi odio qui harum dolorem sunt quasi corporis.</p>
+            </md-tab>
+        </md-tabs>
+    </div>
 </template>
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
-        props: {
-            logo: String
-        }
+        name: 'HeaderComponent'
     }
 </script>
-
-<style lang="scss" scoped>
-
-li {
-    color: turquoise;
-}
-</style>

@@ -10646,6 +10646,7 @@ a.text-dark:focus {
 
 body {
   background: #333333;
+  font-family: "Roboto", sans-serif;
 }
 
 nav {
@@ -10658,5 +10659,24 @@ nav {
 
 a {
   color: #E43F7E;
+}
+
+nav.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.header-spacer {
+  height: 62.85px;
+  width: 100%;
+}
+
+.navbar-toggler {
+  border-color: #E43F7E !important;
+}
+
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(228, 63, 126, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
