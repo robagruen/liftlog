@@ -1,25 +1,15 @@
 <template>
     <div>
-        <md-tabs md-sync-route>
-            <md-tab id="tab-home" md-label="Home" to="/components/tabs" exact>
-                Home Tab
-            </md-tab>
-
-            <md-tab id="tab-pages" md-label="Pages" to="/components/tabs/pages">
-                Pages tab
-                <p>Unde provident nemo reiciendis officia, possimus repellendus. Facere dignissimos dicta quis rem. Aliquam aspernatur dolor atque nisi id deserunt laudantium quam repellat.</p>
-            </md-tab>
-
-            <md-tab id="tab-posts" md-label="Posts" to="/components/tabs/posts">
-                Posts tab
-                <p>Qui, voluptas repellat impedit ducimus earum at ad architecto consectetur perferendis aspernatur iste amet ex tempora animi, illum tenetur quae assumenda iusto.</p>
-            </md-tab>
-
-            <md-tab id="tab-favorites" md-label="Favorites" to="/components/tabs/favorites">
-                Favorites tab
-                <p>Maiores, dolorum. Beatae, optio tempore fuga odit aperiam velit, consequuntur magni inventore sapiente alias sequi odio qui harum dolorem sunt quasi corporis.</p>
-            </md-tab>
-        </md-tabs>
+        <div class="tab">
+            <div class="container">
+                <md-tabs md-sync-route md-alignment="centered">
+                    <md-tab id="tab-exercises" md-label="Exercises" to="/exercises"></md-tab>
+                    <md-tab id="tab-exercise_categories" md-label="Exercise Categories" to="/categories"></md-tab>
+                    <md-tab id="tab-nutrition" md-label="Nutrition" to="/nutrition"></md-tab>
+                </md-tabs>
+            </div>
+        </div>
+        <div class="tab-spacer"></div>
     </div>
 </template>
 
@@ -28,3 +18,16 @@
         name: 'HeaderComponent'
     }
 </script>
+
+<style lang="scss" scoped>
+    .tab {
+        height: 48px;
+        position: fixed;
+        width: 100%
+    }
+
+    .tab-spacer {
+        height: 48px;
+        width: 100%;
+    }
+</style>

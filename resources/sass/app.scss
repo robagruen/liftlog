@@ -1,20 +1,30 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+
 // Variables
 @import 'variables';
+
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 
+// Global App Styles
 body {
     background: $color-darkgray;
     font-family: 'Roboto', sans-serif;
+    color: $color-white;
 }
 
-nav {
+nav, .tab {
     background: $color-lightgray;
+}
+
+.tab {
+    .md-tab-nav-button {
+        //width: 25% !important;
+    }
 }
 
 #logo {
@@ -23,7 +33,22 @@ nav {
 
 a {
     color: $color-fuchsia;
+    &:hover {
+        color: $color-deepfuchsia;
+        transition: all 0.5s;
+    }
 }
+
+button.btn-primary {
+    background-color: $color-fuchsia;
+    border-color: $color-fuchsia;
+    &:hover {
+        background-color: $color-deepfuchsia;
+        border-color: $color-deepfuchsia;
+        transition: all 1s;
+    }
+}
+
 
 // Header
 nav.navbar {
@@ -42,4 +67,23 @@ nav.navbar {
     .navbar-toggler-icon {
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(228, 63, 126, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
+}
+
+
+// Forms
+.liftlog-input, .liftlog-input:-webkit-autofill, .liftlog-input:-webkit-autofill:hover, .liftlog-input:-webkit-autofill:focus, liftlog-input:-internal-autofill-selected {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    box-shadow: none;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 2px $color-fuchsia;
+    width: 100%;
+    background: $color-darkgray;
+    color: $color-white;
 }

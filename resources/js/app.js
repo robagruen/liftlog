@@ -9,10 +9,39 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 
+Vue.use(VueRouter);
 Vue.use(VueMaterial);
+
+
+import Home from './views/Home';
+import Exercises from './views/Exercises';
+import ExerciseCategories from './views/ExerciseCategories';
+import Nutrition from './views/Nutrition';
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'Exercises',
+            component: Exercises
+        },
+        {
+            path: '/categories',
+            name: 'ExerciseCategories',
+            component: ExerciseCategories
+        },
+        {
+            path: '/nutrition',
+            name: 'Nutrition',
+            component: Nutrition
+        }
+    ],
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,4 +65,6 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
 
 const app = new Vue({
     el: '#app',
+    components: { Home },
+    router,
 });

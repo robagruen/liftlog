@@ -23,7 +23,7 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/liftlog-logo.svg') }}" alt="{{ config('app.name', 'LiftLog') }}" id="logo">
@@ -77,8 +77,11 @@
         </nav>
         <div class="header-spacer"></div>
 
-        <header-component></header-component>
-        <main>
+        @if (Auth::check())
+            <header-component></header-component>
+        @endif
+
+        <main class="my-3">
             @yield('content')
         </main>
     </div>

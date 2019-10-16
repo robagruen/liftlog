@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ExercisesController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/add-exercise','ExercisesController@add');
+Route::post('/exercises','ExercisesController@create');
+//
+Route::get('/single-exercise/{exercise}','ExercisesController@edit');
+Route::post('/single-exercise/{exercise}','ExercisesController@update');

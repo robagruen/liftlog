@@ -10647,9 +10647,11 @@ a.text-dark:focus {
 body {
   background: #333333;
   font-family: "Roboto", sans-serif;
+  color: #ffffff;
 }
 
-nav {
+nav,
+.tab {
   background: rgba(102, 102, 102, 0.5);
 }
 
@@ -10659,6 +10661,22 @@ nav {
 
 a {
   color: #E43F7E;
+}
+
+a:hover {
+  color: #B10C4B;
+  transition: all 0.5s;
+}
+
+button.btn-primary {
+  background-color: #E43F7E;
+  border-color: #E43F7E;
+}
+
+button.btn-primary:hover {
+  background-color: #B10C4B;
+  border-color: #B10C4B;
+  transition: all 1s;
 }
 
 nav.navbar {
@@ -10678,5 +10696,26 @@ nav.navbar {
 
 .navbar-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(228, 63, 126, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.liftlog-input,
+.liftlog-input:-webkit-autofill,
+.liftlog-input:-webkit-autofill:hover,
+.liftlog-input:-webkit-autofill:focus,
+liftlog-input:-internal-autofill-selected {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid 2px #E43F7E;
+  width: 100%;
+  background: #333333;
+  color: #ffffff;
 }
 
