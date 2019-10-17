@@ -2,33 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Exercise;
-use Illuminate\Http\Request;
 use Auth;
-use App\Exercises;
+use App\Exercise;
+use App\Entry;
+use Illuminate\Http\Request;
 
 class ExercisesController extends Controller
 {
-
-    /**
-     * The data/base table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'exercises';
-
     public function index()
     {
-        $user = Auth::user();
-        return view('exercises',compact('user'));
+        if (Auth::check() == true) {
+            $exercises = Exercise::where('user_id', Auth::id())->getModels();
+            return view('exercises', ['exercises' => $exercises]);
+        }
+        else {
+            return view('auth.login');
+        }
     }
 
-    public function add()
+    public function viewAddExercise()
     {
-        return view('add-exercise');
+        if (Auth::check() == true) {
+            return view('add-exercise');
+        }
+        else {
+            return view('auth.login');
+        }
     }
 
-    public function create(Request $request)
+    public function addExercise(Request $request)
     {
         $exercise = new Exercise();
         $exercise->name = $request->name;
@@ -37,20 +39,24 @@ class ExercisesController extends Controller
         return redirect('/');
     }
 
-    public function edit(Exercise $exercise)
+    protected  function checkExercise(String $exerciseName):bool
+    {
+        $check = Exercise::where('name', $exerciseName)->getModels();
+        if ($check){
+            return true;
+        }
+        return false;
+    }
+
+    public function viewSingleExercise(Exercise $exercise)
     {
         if (Auth::check() && Auth::user()->id == $exercise->user_id)
         {
-            return view('single-exercise', compact('exercise'));
+            $entries = Entry::where('exercise-id', $exercise->id)->getModels();
+            return view('single-exercise', ['exercise' => $exercise, 'entries' => $entries]);
         }
         else {
             return redirect('/');
         }
     }
-
-    public function update()
-    {
-
-    }
-
 }

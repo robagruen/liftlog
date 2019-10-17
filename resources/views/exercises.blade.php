@@ -5,19 +5,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8 col-lg-6">
-            <div class="card">
-                <div class="card-header bg-dark">Dashboard</div>
-
-                <div class="card-body bg-dark">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                        <a href="/add-exercise">Add Exercise</a>
-                </div>
-            </div>
+                @if ($exercises)
+                    <ul>
+                    @foreach ($exercises as $exercise)
+                        <li>This guy has an exercise <a href="single-exercise/{{$exercise->id}}">{{$exercise->name}}</a></li>
+                    @endforeach
+                    </ul>
+                @else
+                    <p>You have no exercises</p>
+                @endif
+            <a href="/add-exercise">Add Exercise</a>
         </div>
     </div>
 </div>

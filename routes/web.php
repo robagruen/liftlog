@@ -15,8 +15,7 @@ Route::get('/', 'ExercisesController@index');
 
 Auth::routes();
 
-Route::get('/add-exercise','ExercisesController@add');
-Route::post('/exercises','ExercisesController@create');
-//
-Route::get('/single-exercise/{exercise}','ExercisesController@edit');
-Route::post('/single-exercise/{exercise}','ExercisesController@update');
+Route::get('/add-exercise', 'ExercisesController@viewAddExercise');
+Route::post('/exercises', 'ExercisesController@addExercise');
+
+Route::get('/single-exercise/{exercise}', 'ExercisesController@viewSingleExercise');
