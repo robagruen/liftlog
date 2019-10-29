@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExerciseCategoriesTable extends Migration
+class CreateExerciseCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateExerciseCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercise_categories', function (Blueprint $table) {
+        Schema::create('exercise_category', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
-            $table->unsignedBigInteger('user-id');
-            $table->foreign('user-id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateExerciseCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercise_categories');
+        Schema::dropIfExists('exercise_category');
     }
 }

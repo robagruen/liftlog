@@ -15,9 +15,9 @@ class CreateExerciseEntriesTable extends Migration
     {
         Schema::create('exercise_entries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('exercise_id');
+            $table->foreign('exercise_id')->references('id')->on('exercises');
             $table->timestamps();
-            $table->unsignedBigInteger('exercise-id');
-            $table->foreign('exercise-id')->references('id')->on('exercises');
         });
     }
 

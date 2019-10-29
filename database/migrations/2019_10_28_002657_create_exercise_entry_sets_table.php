@@ -15,10 +15,13 @@ class CreateExerciseEntrySetsTable extends Migration
     {
         Schema::create('exercise_entry_sets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('exercise-entry-id');
-            $table->foreign('exercise-entry-id')->references('id')->on('exercise_entries');
+            $table->unsignedBigInteger('exercise_id');
+            $table->foreign('exercise_id')->references('id')->on('exercises');
+            $table->unsignedBigInteger('exercise_entry_id');
+            $table->foreign('exercise_entry_id')->references('id')->on('exercise_entries');
             $table->double('weight', 4, 1);
             $table->integer('repetitions');
+            $table->timestamps();
         });
     }
 

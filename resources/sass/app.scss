@@ -11,61 +11,132 @@
 
 
 // Global App Styles
+html {
+    background: $color-darkgray;
+}
+
 body {
     background: $color-darkgray;
     font-family: 'Roboto', sans-serif;
     color: $color-white;
+    font-size: 16px;
 }
 
-nav, .tab {
-    background: $color-lightgray;
+h1, h2, h3, h4 {
+    font-weight: bold;
 }
 
-.tab {
-    .md-tab-nav-button {
-        //width: 25% !important;
-    }
+h1 {
+    color: $color-fuchsia;
+    font-size: 24px;
 }
 
-#logo {
-    width: 106px;
+h2 {
+    color: $color-white;
+    font-size: 20px;
+}
+
+h3 {
+    color: $color-white;
+    font-size: 16px;
+}
+
+h4 {
+    color: $color-white;
+    font-size: 14px;
+}
+
+p {
+    font-size: 16px;
 }
 
 a {
     color: $color-fuchsia;
+    font-size: 16px;
     &:hover {
         color: $color-deepfuchsia;
         transition: all 0.5s;
     }
 }
 
-button.btn-primary {
+hr {
+    border-top-color: $color-lightgray !important;
+}
+
+nav, .tab {
+    background: $color-lightgray;
+}
+
+.navbar {
+    padding: 0;
+}
+
+#logo {
+    width: 106px;
+}
+
+#dumbell {
+    width: 25px;
+    height: 25px;
+    margin: 20px 0;
+}
+
+.btn-liftlog {
     background-color: $color-fuchsia;
     border-color: $color-fuchsia;
+    text-transform: uppercase;
     &:hover {
         background-color: $color-deepfuchsia;
         border-color: $color-deepfuchsia;
+        text-decoration: none !important;
         transition: all 1s;
     }
 }
 
 
 // Header
-nav.navbar {
-    position: fixed;
+.navbar {
     width: 100%;
     z-index: 1;
-}
-
-.header-spacer {
-    height: 62.85px;
-    width: 100%;
-}
-
-.navbar-toggler {
-    border-color: $color-fuchsia !important;
-    .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(228, 63, 126, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    &-toggler {
+        border: none;
+        padding: 0;
+        &-icon {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(228, 63, 126, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+    }
+    a.nav-link {
+        color: $color-lightergray !important;
+        text-align: right;
+    }
+    .nav-msg {
+        padding: 8px 0;
+        margin: 0;
+    }
+    .hamburger {
+        opacity: 1 !important;
+        padding: 0 !important;
+        position: relative;
+        top: 3px;
+        &-box {
+            width: 20px;
+        }
+        &-inner, &-inner::before, &-inner::after {
+            width: 20px;
+            height: 2px;
+        }
+        &-inner::before {
+            top: -7px;
+        }
+        &-inner::after {
+            bottom: -7px;
+        }
+    }
+    .hamburger-inner, .hamburger-inner::after, .hamburger-inner::before {
+        background-color: $color-fuchsia;
+    }
+    .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::after, .hamburger.is-active .hamburger-inner::before {
+        background-color: $color-fuchsia;
     }
 }
 
@@ -86,4 +157,43 @@ nav.navbar {
     width: 100%;
     background: $color-darkgray;
     color: $color-white;
+}
+
+.md-field {
+    label {
+        text-transform: capitalize;
+        color: $color-white;
+        opacity: 0.5 !important;
+    }
+    .md-input {
+        color: $color-fuchsia;
+        border-bottom: solid 2px $color-fuchsia !important;
+    }
+}
+
+
+// Exercises
+.exercises {
+    .exercise {
+        &:hover {
+            text-decoration: none;
+        }
+        &-container {
+
+        }
+        &-heading {
+            margin-bottom: 5px;
+            color: $color-fuchsia;
+        }
+        &-subheading {
+            margin-bottom: 0;
+            color: $color-lightergray;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.add-exercise {
+    margin-top: 40px;
+    text-align: center;
 }

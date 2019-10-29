@@ -9,39 +9,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.min.css';
-
-Vue.use(VueRouter);
-Vue.use(VueMaterial);
-
-
-import Home from './views/Home';
-import Exercises from './views/Exercises';
-import ExerciseCategories from './views/ExerciseCategories';
-import Nutrition from './views/Nutrition';
-
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'Exercises',
-            component: Exercises
-        },
-        {
-            path: '/categories',
-            name: 'ExerciseCategories',
-            component: ExerciseCategories
-        },
-        {
-            path: '/nutrition',
-            name: 'Nutrition',
-            component: Nutrition
-        }
-    ],
-});
 
 /**
  * The following block of code may be used to automatically register your
@@ -51,11 +18,7 @@ const router = new VueRouter({
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('add-entry-form', require('./components/AddEntryForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -64,7 +27,16 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
  */
 
 const app = new Vue({
-    el: '#app',
-    components: { Home },
-    router,
+    el: '#app'
 });
+
+// Some JS to make the animated navbar work
+document.getElementById("hamburger").onclick = function() {
+    let isExpanded = this.getAttribute("aria-expanded");
+    if (isExpanded == "true") {
+        this.classList.remove("is-active");
+    }
+    else {
+        this.classList.add("is-active");
+    }
+}

@@ -7,14 +7,22 @@
         <div class="col-sm-12 col-md-8 col-lg-6">
             {{$exercise->name}}
             @if ($entries)
-                <ul>
+                {{ $highest_weight }}
+                <div>
                     @foreach ($entries as $entry)
-                        <li>This guy has an entry {{$entry->id}}</li>
+                        <p>{{ $entry->created_at }}</p>
+                        @foreach ($sets as $set)
+                            @if ($set->exercise_entry_id == $entry->id)
+                                <p>{{$set->weight}} llbs. x {{$set->repetitions}}</p>
+                            @endif
+                        @endforeach
+                        <hr>
                     @endforeach
-                </ul>
+                </div>
             @else
                 <p>You have no entries</p>
             @endif
+            <a href="add-entry">Add an entry</a>
         </div>
     </div>
 </div>

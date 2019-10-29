@@ -24,3 +24,27 @@ $color-disabledfuchsia: #E43F7E;
 $color-white: #ffffff;
 $color-darkgray: #333333;
 $color-lightgray: hsla(0, 0%, 40%, 0.5);
+$color-lightergray: hsla(0, 0%, 78.8%, 1);
+
+// Screen Sizes
+$sm: 768px;
+$md: 991px;
+$lg: 1200px;
+
+@mixin sm {
+    @media (min-width: $sm) {
+        @content
+    }
+}
+
+@mixin md {
+    @media (min-width: $md) {
+        @content
+    }
+}
+
+@mixin lg {
+    @media (min-width: $lg) {
+        @content
+    }
+}
