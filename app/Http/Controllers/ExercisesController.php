@@ -7,6 +7,7 @@ use Auth;
 use App\Exercise;
 use App\Entry;
 use App\Category;
+use App\ExerciseCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -27,7 +28,8 @@ class ExercisesController extends Controller
     public function viewAddExercise()
     {
         if (Auth::check() == true) {
-            return view('add-exercise', ['page_title' => 'Add Exercise']);
+            $categories = Category::all();
+            return view('add-exercise', ['page_title' => 'Add Exercise', 'categories' => $categories]);
         }
         else {
             return view('auth.login');
@@ -40,6 +42,16 @@ class ExercisesController extends Controller
         $exercise->name = $request->name;
         $exercise->user_id = Auth::id();
         $exercise->save();
+        for ($i = 0; $i < $request->category_count; $i++) {
+            $curr_checkbox = 'category_' . $i;
+            $checkbox = $request->$curr_checkbox;
+            if ($checkbox):
+                $exerciseCategory = new ExerciseCategories();
+                $exerciseCategory->exercise_category_id = $checkbox;
+                $exerciseCategory->exercise_id = $exercise->id;
+                $exerciseCategory->save();
+            endif;
+        }
         return redirect('/');
     }
 
@@ -110,6 +122,28 @@ class ExercisesController extends Controller
         if (Auth::check()) {
             $categories = Category::where('user_id', Auth::id())->getModels();
             return view('categories', ['categories' => $categories]);
+        }
+        else {
+            return view('auth.login');
+        }
+    }
+
+    public function viewAddCategory() {
+        if (Auth::check()) {
+            return view('add-category', ['page_title' => 'Add Category']);
+        }
+        else {
+            return view('auth.login');
+        }
+    }
+
+    public function addCategory(Request $request) {
+        if (Auth::check()) {
+            $category = new Category();
+            $category->name = $request->name;
+            $category->user_id = Auth::id();
+            $category->save();
+            return redirect('/categories/');
         }
         else {
             return view('auth.login');

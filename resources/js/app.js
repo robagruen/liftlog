@@ -29,14 +29,3 @@ Vue.component('add-entry-form', require('./components/AddEntryForm.vue').default
 const app = new Vue({
     el: '#app'
 });
-
-// Some JS to make the animated navbar work
-document.getElementById("hamburger").onclick = function() {
-    let isExpanded = this.getAttribute("aria-expanded");
-    if (isExpanded == "true") {
-        this.classList.remove("is-active");
-    }
-    else {
-        this.classList.add("is-active");
-    }
-}

@@ -24,3 +24,5 @@ Route::get('/single-exercise/{exercise}/add-entry', 'ExercisesController@viewAdd
 Route::post('/add-entry', 'ExercisesController@addEntry');
 
 Route::get('/categories', 'ExercisesController@viewCategories');
+Route::get('/add-category', 'ExercisesController@viewAddCategory');
+Route::post('/add-category', 'ExercisesController@addCategory');

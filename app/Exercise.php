@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\ExerciseCategories;
 use App\Entry;
 
 class Exercise extends Model
@@ -13,6 +14,11 @@ class Exercise extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function exerciseCategories()
+    {
+        return $this->belongsTo(ExerciseCategories::class);
     }
 
     public function entries()

@@ -9,7 +9,16 @@
                 <input type="text" name="name" class="form-control" />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Add Exercise</button>
+                @foreach ($categories as $i => $category)
+                    <label for="category_{{ $category->id }}">
+                        <input type="checkbox" name="category_{{ $i }}" class="category_checkboxes" id="category_{{ $category->id }}" value="{{ $category->id }}">
+                        {{ $category->name }}
+                    </label>
+                @endforeach
+                <input type="hidden" name="category_count" id="category_count" value="">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-liftlog">Add Exercise</button>
             </div>
             {{ csrf_field() }}
         </form>

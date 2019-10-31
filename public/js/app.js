@@ -49422,17 +49422,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('add-entry-form', __webpack
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
-}); // Some JS to make the animated navbar work
-
-document.getElementById("hamburger").onclick = function () {
-  var isExpanded = this.getAttribute("aria-expanded");
-
-  if (isExpanded == "true") {
-    this.classList.remove("is-active");
-  } else {
-    this.classList.add("is-active");
-  }
-};
+});
 
 /***/ }),
 
