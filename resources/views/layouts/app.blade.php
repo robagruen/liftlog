@@ -65,7 +65,7 @@
                                 <a class="nav-link" href="/">Exercises</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/">Categories</a>
+                                <a class="nav-link" href="/categories/">Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}"
@@ -79,10 +79,6 @@
                 </div>
             </div>
         </nav>
-
-        {{--        @if (Auth::check())--}}
-        {{--            <header-component></header-component>--}}
-        {{--        @endif--}}
 
         <main class="my-3">
             @yield('content')

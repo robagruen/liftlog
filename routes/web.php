@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/add-exercise', 'ExercisesController@viewAddExercise');
 Route::post('/add-exercise', 'ExercisesController@addExercise');
 
-Route::get('/single-exercise/{exercise}', 'ExercisesController@viewSingleExercise');
+Route::get('/single-exercise/{exercise}/', 'ExercisesController@viewSingleExercise');
 
 Route::get('/single-exercise/{exercise}/add-entry', 'ExercisesController@viewAddEntry');
 Route::post('/add-entry', 'ExercisesController@addEntry');
@@ -26,3 +26,4 @@ Route::post('/add-entry', 'ExercisesController@addEntry');
 Route::get('/categories', 'ExercisesController@viewCategories');
 Route::get('/add-category', 'ExercisesController@viewAddCategory');
 Route::post('/add-category', 'ExercisesController@addCategory');
+Route::get('/categories/single-category/{category}/', 'ExercisesController@viewSingleCategory');

@@ -7,11 +7,13 @@
         <div class="col-sm-12 col-md-8 col-lg-6">
             @if ($categories)
                 <div class="exercises">
-                @foreach ($categories as $category)
-                    <a href="single-exercise/{{ $category->id }}/" class="liftlog-list">
+                @foreach ($categories as $i => $category)
+                    <a href="single-category/{{ $category->id }}/" class="liftlog-list">
                         <div class="liftlog-list-wrapper">
                             <h2 class="liftlog-list-heading">{{ $category->name }}</h2>
-                            <h4 class="liftlog-list-subheading">2 Itmes</h4>
+                            @if ($count)
+                            <h4 class="liftlog-list-subheading">{{ $count[$i] }} Items</h4>
+                            @endif
                             <hr>
                         </div>
                     </a>

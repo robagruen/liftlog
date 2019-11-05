@@ -9,12 +9,16 @@
                 <input type="text" name="name" class="form-control" />
             </div>
             <div class="form-group">
-                @foreach ($categories as $i => $category)
-                    <label for="category_{{ $category->id }}">
-                        <input type="checkbox" name="category_{{ $i }}" class="category_checkboxes" id="category_{{ $category->id }}" value="{{ $category->id }}">
-                        {{ $category->name }}
-                    </label>
-                @endforeach
+                @if ($categories)
+                    @foreach ($categories as $i => $category)
+                        <label for="category_{{ $category->id }}">
+                            <input type="checkbox" name="category_{{ $i }}" class="category_checkboxes" id="category_{{ $category->id }}" value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </label>
+                    @endforeach
+                @else
+                    You seem to have no categories.  <a href="/categories/">Add Category</a>
+                @endif
                 <input type="hidden" name="category_count" id="category_count" value="">
             </div>
             <div class="form-group">

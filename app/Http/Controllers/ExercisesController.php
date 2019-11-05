@@ -17,8 +17,9 @@ class ExercisesController extends Controller
     {
         if (Auth::check() == true) {
             $exercises = Exercise::where('user_id', Auth::id())->getModels();
-            $page_title = 'Dashboard';
-            return view('exercises', ['exercises' => $exercises, 'page_title' => $page_title]);
+            $categories = Category::where('user_id', Auth::id())->getModels();
+            $exerciseCategories = ExerciseCategories::all();
+            return view('exercises', ['exercises' => $exercises, 'categories' => $categories, 'exerciseCategories' => $exerciseCategories, 'pageTitle' => 'Dashboard']);
         }
         else {
             return view('auth.login');
@@ -28,7 +29,7 @@ class ExercisesController extends Controller
     public function viewAddExercise()
     {
         if (Auth::check() == true) {
-            $categories = Category::all();
+            $categories = Category::where('user_id', Auth::id())->getModels();
             return view('add-exercise', ['page_title' => 'Add Exercise', 'categories' => $categories]);
         }
         else {
@@ -121,7 +122,18 @@ class ExercisesController extends Controller
     public function viewCategories() {
         if (Auth::check()) {
             $categories = Category::where('user_id', Auth::id())->getModels();
-            return view('categories', ['categories' => $categories]);
+            $cat_count_arr = array();
+            $exerciseCategories = ExerciseCategories::all();
+            foreach ($categories as $category):
+                $cat_count = 0;
+                foreach ($exerciseCategories as $exerciseCategory):
+                    if ($category->id == $exerciseCategory->exercise_category_id):
+                        $cat_count++;
+                    endif;
+                endforeach;
+                array_push($cat_count_arr, $cat_count);
+            endforeach;
+            return view('categories', ['categories' => $categories, 'count' => $cat_count_arr]);
         }
         else {
             return view('auth.login');
@@ -148,5 +160,20 @@ class ExercisesController extends Controller
         else {
             return view('auth.login');
         }
+    }
+
+    public function viewSingleCategory(Category $category) {
+        $exerciseCategories = ExerciseCategories::all();
+        $exercises = Exercise::where('user_id', Auth::id())->getModels();
+        $categories = Category::where('user_id', Auth::id())->getModels();
+        $exercise_results = array();
+        foreach ($exercises as $exercise):
+            foreach ($exerciseCategories as $exerciseCategory):
+                if ($exercise->id == $exerciseCategory->exercise_id && $category->id == $exerciseCategory->exercise_category_id):
+                    array_push($exercise_results, $exercise);
+                endif;
+            endforeach;
+        endforeach;
+        return view('exercises', ['exercises' => $exercise_results, 'categories' => $categories, 'exerciseCategories' => $exerciseCategories, 'pageTitle' => $category->name]);
     }
 }
