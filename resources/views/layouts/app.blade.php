@@ -24,64 +24,65 @@
 </head>
 <body>
     <div id="app">
-
-        <nav class="navbar navbar-expand-xl navbar-light">
+        <nav class="navbar">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    @guest
-                        <img src="{{ asset('images/liftlog-logo.svg') }}" alt="{{ config('app.name', 'LiftLog') }}" id="logo">
-                    @else
-                        <img src="{{ asset('images/dumbell.svg') }}" alt="{{ config('app.name', 'LiftLog') }}" id="dumbell">
-                    @endguest
+                <a class="logo" href="{{ url('/') }}">
+                    <img src="{{ asset('images/liftlog-logo.svg') }}" alt="{{ config('app.name', 'LiftLog') }}" class="logo-liftlog">
                 </a>
 
-                <button class="navbar-toggler hamburger hamburger--spin" id="hamburger" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
+                <button class="navbar-toggler hamburger hamburger--spin" id="hamburger" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <p class="nav-msg">Welcome back, {{ Auth::user()->name }}!</p>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/">Exercises</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/categories/">Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
             </div>
         </nav>
-
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="container">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-msg">Welcome back, {{ Auth::user()->name }}!</li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Exercises</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories/">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/settings/">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
         <main class="my-3">
-            @yield('content')
+            <div class="container single-exercise">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-8 col-lg-6">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>

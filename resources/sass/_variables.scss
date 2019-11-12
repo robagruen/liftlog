@@ -25,6 +25,7 @@ $color-white: #ffffff;
 $color-darkgray: #333333;
 $color-lightgray: hsla(0, 0%, 40%, 0.5);
 $color-lightergray: hsla(0, 0%, 78.8%, 1);
+$color-lightestgray: rgba(200, 200, 200, 0.5);
 
 // Screen Sizes
 $sm: 768px;
@@ -46,5 +47,17 @@ $lg: 1200px;
 @mixin lg {
     @media (min-width: $lg) {
         @content
+    }
+}
+
+@mixin isDarkMode {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+@mixin isLightMode {
+    @media (prefers-color-scheme: light) {
+        @content;
     }
 }

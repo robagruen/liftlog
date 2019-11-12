@@ -16,8 +16,8 @@ class ExercisesController extends Controller
     public function index()
     {
         if (Auth::check() == true) {
-            $exercises = Exercise::where('user_id', Auth::id())->getModels();
-            $categories = Category::where('user_id', Auth::id())->getModels();
+            $exercises = Exercise::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
+            $categories = Category::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
             $exerciseCategories = ExerciseCategories::all();
             return view('exercises', ['exercises' => $exercises, 'categories' => $categories, 'exerciseCategories' => $exerciseCategories, 'pageTitle' => 'Dashboard']);
         }
@@ -29,7 +29,7 @@ class ExercisesController extends Controller
     public function viewAddExercise()
     {
         if (Auth::check() == true) {
-            $categories = Category::where('user_id', Auth::id())->getModels();
+            $categories = Category::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
             return view('add-exercise', ['page_title' => 'Add Exercise', 'categories' => $categories]);
         }
         else {
@@ -56,29 +56,23 @@ class ExercisesController extends Controller
         return redirect('/');
     }
 
-    protected  function checkExercise(String $exerciseName):bool
-    {
-        $check = Exercise::where('name', $exerciseName)->getModels();
-        if ($check){
-            return true;
-        }
-        return false;
-    }
-
     public function viewSingleExercise(Exercise $exercise)
     {
         // This view has the exercise object
         if (Auth::check() && Auth::id() == $exercise->user_id)
         {
-            $entries = Entry::where('exercise_id', $exercise->id)->getModels();
+            $entries = Entry::where('exercise_id', $exercise->id)->latest()->getModels();
             $sets = Set::where('exercise_id', $exercise->id)->getModels();
             $highest_weight = 0;
+            $top_entry_info = array();
             foreach ($sets as $set):
                 if ($set->weight > $highest_weight):
                     $highest_weight = $set->weight;
+                    $time = date('F d, Y', strtotime($set->updated_at));
+                    $top_entry_info = array('weight' => $highest_weight, 'time' => $time);
                 endif;
             endforeach;
-            return view('single-exercise', ['exercise' => $exercise, 'entries' => $entries, 'sets' => $sets, 'page_title' => $exercise->name, 'highest_weight' => $highest_weight]);
+            return view('single-exercise', ['exercise' => $exercise, 'entries' => $entries, 'sets' => $sets, 'page_title' => $exercise->name, 'top_entry_info' => $top_entry_info]);
         }
         else {
             return redirect('/');
@@ -87,7 +81,8 @@ class ExercisesController extends Controller
 
     public function viewAddEntry($exerciseID) {
         if (Auth::check()) {
-            return view('add-entry', ['exercise' => $exerciseID]);
+            $exercise = Exercise::where('id', $exerciseID)->getModels();
+            return view('add-entry', ['exercise' => $exerciseID, 'exercise_name' => $exercise]);
         }
         else {
             return view('auth.login');
@@ -119,9 +114,16 @@ class ExercisesController extends Controller
         }
     }
 
+    public function deleteEntry(Exercise $exercise, Entry $entry) {
+        Set::where('exercise_entry_id', $entry->id)->delete();
+        Entry::where('id', $entry->id)->delete();
+        $redirectLink = '/single-exercise/' . $exercise->id . '/';
+        return redirect($redirectLink);
+    }
+
     public function viewCategories() {
         if (Auth::check()) {
-            $categories = Category::where('user_id', Auth::id())->getModels();
+            $categories = Category::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
             $cat_count_arr = array();
             $exerciseCategories = ExerciseCategories::all();
             foreach ($categories as $category):
@@ -164,8 +166,8 @@ class ExercisesController extends Controller
 
     public function viewSingleCategory(Category $category) {
         $exerciseCategories = ExerciseCategories::all();
-        $exercises = Exercise::where('user_id', Auth::id())->getModels();
-        $categories = Category::where('user_id', Auth::id())->getModels();
+        $exercises = Exercise::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
+        $categories = Category::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
         $exercise_results = array();
         foreach ($exercises as $exercise):
             foreach ($exerciseCategories as $exerciseCategory):
@@ -175,5 +177,40 @@ class ExercisesController extends Controller
             endforeach;
         endforeach;
         return view('exercises', ['exercises' => $exercise_results, 'categories' => $categories, 'exerciseCategories' => $exerciseCategories, 'pageTitle' => $category->name]);
+    }
+
+    public function viewSettings() {
+        if (Auth::check()) {
+            $exercises = Exercise::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
+            $categories = Category::where('user_id', Auth::id())->orderBy('name', 'asc')->getModels();
+            return view('settings', ['exercises' => $exercises, 'categories' => $categories]);
+        }
+        else {
+            return view('auth.login');
+        }
+    }
+
+    public function deleteExercise(Exercise $exercise) {
+        if (Auth::check()) {
+            Set::where('exercise_id', $exercise->id)->delete();
+            Entry::where('exercise_id', $exercise->id)->delete();
+            ExerciseCategories::where('exercise_id', $exercise->id)->delete();
+            Exercise::where('id', $exercise->id)->delete();
+            return redirect('/settings/');
+        }
+        else {
+            return view('auth.login');
+        }
+    }
+
+    public function deleteCategory(Category $category) {
+        if (Auth::check()) {
+            ExerciseCategories::where('exercise_category_id', $category->id)->delete();
+            Category::where('id', $category->id)->delete();
+            return redirect('/settings/');
+        }
+        else {
+            return view('auth.login');
+        }
     }
 }

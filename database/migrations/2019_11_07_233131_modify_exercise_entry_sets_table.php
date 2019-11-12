@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyExercisesTable extends Migration
+class ModifyExerciseEntrySetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class ModifyExercisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercise_entry_sets', function (Blueprint $table) {
-            $table->double('weight', 5, 1)->change();
-        });
+        //
     }
 
     /**

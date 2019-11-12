@@ -1853,6 +1853,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1871,11 +1875,37 @@ __webpack_require__.r(__webpack_exports__);
       var nextSet = previousSet.cloneNode(true);
       this.setCount++;
       nextSet.id = this.setCount;
-      nextSet["children"][0].value = "";
-      nextSet["children"][0].name = "weight_" + this.setCount;
+      nextSet["children"][0].innerText = "Set" + this.setCount;
       nextSet["children"][1].value = "";
-      nextSet["children"][1].name = "reps_" + this.setCount;
+      nextSet["children"][1].name = "weight_" + this.setCount;
+      nextSet["children"][2].value = "";
+      nextSet["children"][2].name = "reps_" + this.setCount;
       previousSet.parentNode.insertBefore(nextSet, previousSet.nextSibling);
+    },
+    removeRecent: function removeRecent() {
+      var recentSet = document.getElementById(this.setCount);
+      recentSet.remove();
+      this.setCount--;
+    },
+    checkForm: function checkForm() {
+      var weights = document.getElementsByClassName("weight");
+
+      for (var i = 0; i <= weights.length; i++) {
+        var weight = weights[i];
+      }
+
+      var reps = document.getElementsByClassName("reps");
+      var rep;
+
+      for (var _i = 0; _i <= reps.length; _i++) {
+        rep = reps[_i];
+
+        if (Number.isInteger(parseInt(rep.value))) {//console.log(typeof(parseInt(reps.value)));
+          //console.log("yes");
+        } else {
+          return false;
+        }
+      }
     }
   }
 });
@@ -37179,7 +37209,7 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
+    _c("div", { staticClass: "form-group text-center" }, [
       _c("input", {
         attrs: { type: "hidden", name: "set_count", id: "set-count" },
         domProps: { value: _vm.setCount }
@@ -37190,25 +37220,46 @@ var render = function() {
         domProps: { value: _vm.exercise_id }
       }),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-primary btn-liftlog",
-          attrs: { href: "javascript:void(0)" },
-          on: {
-            click: function($event) {
-              return _vm.duplicateFields()
+      _c("div", { staticClass: "modify-set-count" }, [
+        _c(
+          "a",
+          {
+            attrs: { href: "javascript:void(0);" },
+            on: {
+              click: function($event) {
+                return _vm.duplicateFields()
+              }
             }
-          }
-        },
-        [_vm._v("Add Set")]
-      ),
+          },
+          [_vm._v("Add Set")]
+        ),
+        _vm._v(" "),
+        _vm.setCount > 1
+          ? _c(
+              "a",
+              {
+                attrs: { href: "javascript:void(0);" },
+                on: {
+                  click: function($event) {
+                    return _vm.removeRecent()
+                  }
+                }
+              },
+              [_vm._v("Remove Most Recent Set")]
+            )
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _c(
         "button",
         {
-          staticClass: "btn btn-primary btn-liftlog",
-          attrs: { type: "submit" }
+          staticClass: "btn btn-liftlog",
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              return _vm.checkForm()
+            }
+          }
         },
         [_vm._v("Complete Entry")]
       )
@@ -37221,7 +37272,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group entry", attrs: { id: "1" } }, [
+      _c("h4", [_vm._v("Set 1")]),
+      _vm._v(" "),
       _c("input", {
+        staticClass: "liftlog-input weight",
         attrs: {
           type: "text",
           placeholder: "Weight",
@@ -37232,6 +37286,7 @@ var staticRenderFns = [
       }),
       _vm._v(" "),
       _c("input", {
+        staticClass: "liftlog-input reps",
         attrs: {
           type: "text",
           placeholder: "Reps",

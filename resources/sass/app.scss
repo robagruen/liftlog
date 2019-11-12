@@ -11,14 +11,39 @@
 
 
 // Global App Styles
-html {
-    background: $color-darkgray;
-}
-
 body {
-    background: $color-darkgray;
     font-family: 'Roboto', sans-serif;
     color: $color-white;
+    @include isLightMode {
+        color: $color-darkgray;
+    }
+    font-size: 16px;
+}
+
+html, body {
+    background: $color-darkgray;
+    @include isLightMode {
+        background: $color-white;
+    }
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+p {
     font-size: 16px;
 }
 
@@ -26,28 +51,11 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 
-h1 {
-    color: $color-fuchsia;
-    font-size: 24px;
-}
-
-h2 {
+h1, h2, h3, h4, p {
     color: $color-white;
-    font-size: 20px;
-}
-
-h3 {
-    color: $color-white;
-    font-size: 16px;
-}
-
-h4 {
-    color: $color-white;
-    font-size: 14px;
-}
-
-p {
-    font-size: 16px;
+    @include isLightMode {
+        color: $color-darkgray;
+    }
 }
 
 a {
@@ -61,30 +69,18 @@ a {
 
 hr {
     border-top-color: $color-lightgray !important;
+    width: 100%;
 }
 
-nav, .tab {
-    background: $color-lightgray;
-}
-
-.navbar {
-    padding: 0;
-}
-
-#logo {
-    width: 106px;
-}
-
-#dumbell {
-    width: 25px;
-    height: 25px;
-    margin: 20px 0;
+label {
+    display: block;
 }
 
 .btn-liftlog {
     background-color: $color-fuchsia;
     border-color: $color-fuchsia;
     text-transform: uppercase;
+    color: $color-white !important;
     &:hover {
         background-color: $color-deepfuchsia;
         border-color: $color-deepfuchsia;
@@ -95,25 +91,22 @@ nav, .tab {
 
 
 // Header
-.navbar {
+nav.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
     width: 100%;
     z-index: 1;
-    &-toggler {
-        border: none;
+    >.container {
         padding: 0;
-        &-icon {
-            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(228, 63, 126, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+    .logo {
+        &-liftlog {
+            width: 106px;
+            margin: 20px 0;
         }
     }
-    a.nav-link {
-        color: $color-lightergray !important;
-        text-align: right;
-    }
-    .nav-msg {
-        padding: 8px 0;
-        margin: 0;
-    }
     .hamburger {
+        display: block;
         opacity: 1 !important;
         padding: 0 !important;
         position: relative;
@@ -132,17 +125,40 @@ nav, .tab {
             bottom: -7px;
         }
     }
-    .hamburger-inner, .hamburger-inner::after, .hamburger-inner::before {
-        background-color: $color-fuchsia;
-    }
-    .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::after, .hamburger.is-active .hamburger-inner::before {
+    .hamburger-inner, .hamburger-inner::after, .hamburger-inner::before, .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::after, .hamburger.is-active .hamburger-inner::before {
         background-color: $color-fuchsia;
     }
 }
 
+#navbarToggleExternalContent {
+    .nav-msg {
+        padding: 8px 0;
+    }
+    a.nav-link {
+        color: $color-lightergray !important;
+        &:hover {
+            color: $color-white !important;
+            transition: all 0.5s;
+        }
+        text-align: right;
+        @include isLightMode {
+            color: $color-fuchsia !important;
+            &:hover {
+                color: $color-deepfuchsia !important;
+                transition: all 0.5s !important;
+            }
+        }
+    }
+}
 
-// Forms
-.liftlog-input, .liftlog-input:-webkit-autofill, .liftlog-input:-webkit-autofill:hover, .liftlog-input:-webkit-autofill:focus, liftlog-input:-internal-autofill-selected {
+nav.navbar, #navbarToggleExternalContent {
+    background: $color-lightgray;
+    @include isLightMode {
+        background: $color-lightestgray;
+    }
+}
+
+.liftlog-input {
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -155,45 +171,121 @@ nav, .tab {
     border-right: none;
     border-bottom: solid 2px $color-fuchsia;
     width: 100%;
-    background: $color-darkgray;
+    background: transparent;
     color: $color-white;
+    @include isLightMode {
+        color: $color-darkgray;
+    }
+    height: 40px;
+    &::placeholder {
+        @include isLightMode {
+            color: $color-lightgray;
+            opacity: 1;
+        }
+    }
 }
 
-.md-field {
-    label {
-        text-transform: capitalize;
-        color: $color-white;
-        opacity: 0.5 !important;
+.vertical-menu {
+    fill: $color-white;
+    stroke: $color-white;
+    float: right;
+    cursor: pointer;
+    @include isLightMode {
+        fill: $color-darkgray;
+        stroke: $color-darkgray;
     }
-    .md-input {
+}
+
+.liftlog-list {
+    &-item {
+        &:hover {
+            text-decoration: none;
+            .liftlog-list-heading {
+                color: $color-white;
+                @include isLightMode {
+                    color: $color-darkgray;
+                }
+                transition: 0.5s all;
+            }
+        }
+        &-wrapper {
+            .dropdown {
+                bottom: 33px;
+            }
+        }
+    }
+    &-heading {
         color: $color-fuchsia;
-        border-bottom: solid 2px $color-fuchsia !important;
+    }
+    &-subheading {
+        text-transform: uppercase;
     }
 }
 
 
 // Exercises
-.exercises {
-    .exercise {
-        &:hover {
-            text-decoration: none;
-        }
-        &-container {
+.add-exercise {
+    margin-top: 40px;
+    text-align: center;
+}
 
-        }
-        &-heading {
-            margin-bottom: 5px;
+
+// Single Exercise
+.single-exercise {
+    &-top-entry {
+        margin-bottom: 40px;
+        &-weight {
             color: $color-fuchsia;
-        }
-        &-subheading {
+            font-size: 90px;
+            font-weight: 400;
+            text-align: center;
+            line-height: 105px;
             margin-bottom: 0;
-            color: $color-lightergray;
-            text-transform: uppercase;
+        }
+        &-time {
+            margin-bottom: 0;
+            text-align: center;
+        }
+    }
+    &-container {
+        .entry {
+            &-time {
+                color: $color-lightergray;
+                @include isLightMode {
+                    color: $color-lightgray;
+                }
+                margin-bottom: 10px;
+                line-height: 19px;
+            }
+            &-info {
+                margin-bottom: 10px;
+                line-height: 16px;
+            }
+            .dropdown {
+                bottom: 22px;
+            }
+        }
+    }
+    .btn-row {
+        width: 100%;
+        text-align: center;
+        margin-top: 40px;
+        .btn-liftlog {
+            text-align: center;
         }
     }
 }
 
-.add-exercise {
-    margin-top: 40px;
-    text-align: center;
+
+// Add Entry
+.modify-set-count {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: left;
+    a:nth-child(2) {
+        float: right;
+    }
+    &::after {
+        clear: both;
+    }
 }
