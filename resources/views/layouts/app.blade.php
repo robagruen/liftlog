@@ -24,57 +24,17 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar">
-            <div class="container">
-                <a class="logo" href="{{ url('/') }}">
-                    <img src="{{ asset('images/liftlog-logo.svg') }}" alt="{{ config('app.name', 'LiftLog') }}" class="logo-liftlog">
-                </a>
-
-                <button class="navbar-toggler hamburger hamburger--spin" id="hamburger" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-                </button>
-            </div>
-        </nav>
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="container">
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-msg">Welcome back, {{ Auth::user()->name }}!</li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Exercises</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/categories/">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/settings/">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
+        @guest
+            <header-component
+                v-bind:auth="false"
+                name=""
+            ></header-component>
+        @else
+            <header-component
+                v-bind:auth="true"
+                name="{{ Auth::user()->name }}"
+            ></header-component>
+        @endguest
         <main class="my-3">
             <div class="container single-exercise">
                 <div class="row justify-content-center">

@@ -19,6 +19,7 @@ import Vue from 'vue';
  */
 
 Vue.component('add-entry-form', require('./components/AddEntryForm.vue').default);
+Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

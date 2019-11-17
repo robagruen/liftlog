@@ -6,7 +6,7 @@
 
     <form method="POST" action="/add-exercise">
         <div class="form-group">
-            <input type="text" name="name" class="form-control" />
+            <input type="text" name="name" class="liftlog-input" placeholder="Exercise Name" />
         </div>
         <div class="form-group">
             @if ($categories)
