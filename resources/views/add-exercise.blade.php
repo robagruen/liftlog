@@ -2,13 +2,13 @@
 
 @section('content')
 
-    <h2>Add New Exercise</h2>
-
     <form method="POST" action="/add-exercise">
-        <div class="form-group">
-            <input type="text" name="name" class="liftlog-input" placeholder="Exercise Name" />
+        <div class="liftlog-form-group">
+            <label for="name" class="liftlog-label">Exercise Name</label>
+            <input type="text" name="name" id="name" class="liftlog-input" />
         </div>
-        <div class="form-group">
+        <div class="liftlog-form-group">
+            <label class="liftlog-label">Exercise Categories</label>
             @if ($categories)
                 @foreach ($categories as $i => $category)
                     <label for="category_{{ $category->id }}">
@@ -21,7 +21,7 @@
             @endif
             <input type="hidden" name="category_count" id="category_count" value="">
         </div>
-        <div class="form-group">
+        <div class="liftlog-button-group">
             <button type="submit" class="btn btn-liftlog">Add Exercise</button>
         </div>
         {{ csrf_field() }}

@@ -10,6 +10,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     color: $color-white;
+    padding-bottom: 40px;
     @include isLightMode {
         color: $color-darkgray;
     }
@@ -87,6 +88,10 @@ label {
 
 
 // Header
+.header-component-container {
+    margin-bottom: 40px;
+}
+
 nav.navbar {
     padding-top: 0;
     padding-bottom: 0;
@@ -95,10 +100,16 @@ nav.navbar {
     >.container {
         padding: 0;
     }
-    .logo {
-        &-liftlog {
-            width: 106px;
-            margin: 20px 0;
+    .logo-icon-container {
+        padding: 25px 0;
+        .dumbell-icon {
+            width: 22px;
+            margin-bottom: 5px;
+        }
+        .page-title {
+            @extend h2;
+            margin-bottom: 0;
+            margin-left: 10px;
         }
     }
     .hamburger {
@@ -127,6 +138,11 @@ nav.navbar {
 }
 
 #navbarToggleExternalContent {
+    .collapse-container {
+        @include xs {
+            padding: 0;
+        }
+    }
     .nav-msg {
         padding: 8px 0;
     }
@@ -154,31 +170,56 @@ nav.navbar, #navbarToggleExternalContent {
     }
 }
 
-.liftlog-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    box-shadow: none;
-    outline: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: solid 2px $color-fuchsia;
-    width: 100%;
-    background: transparent;
-    color: $color-white;
-    @include isLightMode {
-        color: $color-darkgray;
+.liftlog-form-group {
+    margin-bottom: 1.5rem;
+    .liftlog-label {
+        font-size: 12px;
+        margin-bottom: 0;
+        color: $color-anothergray;
     }
-    height: 40px;
-    &::placeholder {
+    .liftlog-label-invisible {
+        border: 0;
+        clip: rect(1px 1px 1px 1px);
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .liftlog-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        box-shadow: none;
+        outline: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid 2px $color-fuchsia;
+        width: 100%;
+        background: transparent;
+        margin-bottom: 1rem;
+        color: $color-white;
         @include isLightMode {
-            color: $color-lightgray;
-            opacity: 1;
+            color: $color-darkgray;
+        }
+        height: 40px;
+        &::placeholder {
+            @include isLightMode {
+                color: $color-lightgray;
+                opacity: 1;
+            }
         }
     }
+}
+
+.liftlog-button-group {
+    margin-top: 40px;
+    text-align: center;
 }
 
 .vertical-menu {
@@ -215,6 +256,16 @@ nav.navbar, #navbarToggleExternalContent {
     }
     &-subheading {
         text-transform: uppercase;
+    }
+}
+
+
+// Login
+.liftlog-logo-container {
+    text-align: center;
+    margin-bottom: 40px;
+    .liftlog-logo {
+        width: 200px;
     }
 }
 
@@ -275,8 +326,6 @@ nav.navbar, #navbarToggleExternalContent {
 
 // Add Entry
 .modify-set-count {
-    margin-top: 20px;
-    margin-bottom: 40px;
     text-align: left;
     a:nth-child(2) {
         float: right;

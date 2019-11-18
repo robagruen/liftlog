@@ -1857,10 +1857,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      setCount: 1
+      setCount: 1,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   props: {
@@ -1875,11 +1883,12 @@ __webpack_require__.r(__webpack_exports__);
       var nextSet = previousSet.cloneNode(true);
       this.setCount++;
       nextSet.id = this.setCount;
+      console.log(nextSet["children"]);
       nextSet["children"][0].innerText = "Set" + this.setCount;
-      nextSet["children"][1].value = "";
-      nextSet["children"][1].name = "weight_" + this.setCount;
       nextSet["children"][2].value = "";
-      nextSet["children"][2].name = "reps_" + this.setCount;
+      nextSet["children"][2].name = "weight_" + this.setCount;
+      nextSet["children"][4].value = "";
+      nextSet["children"][4].name = "reps_" + this.setCount;
       previousSet.parentNode.insertBefore(nextSet, previousSet.nextSibling);
     },
     removeRecent: function removeRecent() {
@@ -37293,62 +37302,71 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group text-center" }, [
-      _c("input", {
-        attrs: { type: "hidden", name: "set_count", id: "set-count" },
-        domProps: { value: _vm.setCount }
-      }),
+    _c("form", { attrs: { method: "POST", action: "/add-entry" } }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c("input", {
-        attrs: { type: "hidden", name: "exercise_id", id: "exercise-id" },
-        domProps: { value: _vm.exercise_id }
-      }),
+      _c("div", { staticClass: "liftlog-form-group" }, [
+        _c("input", {
+          attrs: { type: "hidden", name: "set_count", id: "set-count" },
+          domProps: { value: _vm.setCount }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "exercise_id", id: "exercise-id" },
+          domProps: { value: _vm.exercise_id }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "modify-set-count" }, [
+          _c(
+            "a",
+            {
+              attrs: { href: "javascript:void(0);" },
+              on: {
+                click: function($event) {
+                  return _vm.duplicateFields()
+                }
+              }
+            },
+            [_vm._v("Add Set")]
+          ),
+          _vm._v(" "),
+          _vm.setCount > 1
+            ? _c(
+                "a",
+                {
+                  attrs: { href: "javascript:void(0);" },
+                  on: {
+                    click: function($event) {
+                      return _vm.removeRecent()
+                    }
+                  }
+                },
+                [_vm._v("Remove Most Recent Set")]
+              )
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "modify-set-count" }, [
+      _c("div", { staticClass: "liftlog-button-group" }, [
         _c(
-          "a",
+          "button",
           {
-            attrs: { href: "javascript:void(0);" },
+            staticClass: "btn btn-liftlog",
+            attrs: { type: "submit" },
             on: {
               click: function($event) {
-                return _vm.duplicateFields()
+                return _vm.checkForm()
               }
             }
           },
-          [_vm._v("Add Set")]
-        ),
-        _vm._v(" "),
-        _vm.setCount > 1
-          ? _c(
-              "a",
-              {
-                attrs: { href: "javascript:void(0);" },
-                on: {
-                  click: function($event) {
-                    return _vm.removeRecent()
-                  }
-                }
-              },
-              [_vm._v("Remove Most Recent Set")]
-            )
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-liftlog",
-          attrs: { type: "submit" },
-          on: {
-            click: function($event) {
-              return _vm.checkForm()
-            }
-          }
-        },
-        [_vm._v("Complete Entry")]
-      )
+          [_vm._v("Complete Entry")]
+        )
+      ])
     ])
   ])
 }
@@ -37357,31 +37375,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group entry", attrs: { id: "1" } }, [
-      _c("h4", [_vm._v("Set 1")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "liftlog-input weight",
-        attrs: {
-          type: "text",
-          placeholder: "Weight",
-          name: "weight_1",
-          maxlength: "5",
-          required: ""
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "liftlog-input reps",
-        attrs: {
-          type: "text",
-          placeholder: "Reps",
-          name: "reps_1",
-          maxlength: "3",
-          required: ""
-        }
-      })
-    ])
+    return _c(
+      "div",
+      { staticClass: "liftlog-form-group entry", attrs: { id: "1" } },
+      [
+        _c("h4", [_vm._v("Set 1")]),
+        _vm._v(" "),
+        _c("label", { staticClass: "liftlog-label" }, [_vm._v("Weight")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "liftlog-input weight",
+          attrs: {
+            type: "text",
+            name: "weight_1",
+            maxlength: "5",
+            required: ""
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "liftlog-label" }, [_vm._v("Reps")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "liftlog-input reps",
+          attrs: { type: "text", name: "reps_1", maxlength: "3", required: "" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -37405,7 +37424,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "header-component-container" }, [
     _c("nav", { staticClass: "navbar" }, [
       _c("div", { staticClass: "container" }, [
         _vm._m(0),
@@ -37438,7 +37457,7 @@ var render = function() {
       "div",
       { staticClass: "collapse", attrs: { id: "navbarToggleExternalContent" } },
       [
-        _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "container collapse-container" }, [
           _vm.auth == false
             ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
                 _vm._m(2),
@@ -37499,15 +37518,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("a", { staticClass: "logo", attrs: { href: "/" } }, [
+    return _c("div", { staticClass: "logo-icon-container" }, [
+      _c("a", { attrs: { href: "/" } }, [
         _c("img", {
-          staticClass: "logo-liftlog",
-          attrs: { src: "/images/liftlog-logo.svg", alt: "Liftlog logo" }
+          staticClass: "dumbell-icon",
+          attrs: { src: "/images/dumbell.svg", alt: "Liftlog logo" }
         })
       ]),
       _vm._v(" "),
-      _c("span", [_vm._v("Login")])
+      _c("span", { staticClass: "page-title" }, [_vm._v("Login")])
     ])
   },
   function() {

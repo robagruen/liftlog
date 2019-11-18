@@ -1,19 +1,26 @@
 <template>
     <div>
-        <div class="form-group entry" id="1">
-            <h4>Set 1</h4>
-            <input type="text" placeholder="Weight" name="weight_1" class="liftlog-input weight" maxlength="5" required>
-            <input type="text" placeholder="Reps" name="reps_1" class="liftlog-input reps" maxlength="3" required>
-        </div>
-        <div class="form-group text-center">
-            <input type="hidden" name="set_count" id="set-count" v-bind:value="setCount">
-            <input type="hidden" name="exercise_id" id="exercise-id" v-bind:value="exercise_id">
-            <div class="modify-set-count">
-                <a href="javascript:void(0);" @click="duplicateFields()">Add Set</a>
-                <a  v-if="setCount > 1" href="javascript:void(0);" @click="removeRecent()">Remove Most Recent Set</a>
+        <form method="POST" action="/add-entry">
+            <div class="liftlog-form-group entry" id="1">
+                <h4>Set 1</h4>
+                <label class="liftlog-label">Weight</label>
+                <input type="text" name="weight_1" class="liftlog-input weight" maxlength="5" required />
+                <label class="liftlog-label">Reps</label>
+                <input type="text" name="reps_1" class="liftlog-input reps" maxlength="3" required />
             </div>
-            <button type="submit" class="btn btn-liftlog" @click="checkForm()">Complete Entry</button>
-        </div>
+            <div class="liftlog-form-group">
+                <input type="hidden" name="set_count" id="set-count" v-bind:value="setCount">
+                <input type="hidden" name="exercise_id" id="exercise-id" v-bind:value="exercise_id">
+                <input type="hidden" name="_token" v-bind:value="csrf">
+                <div class="modify-set-count">
+                    <a href="javascript:void(0);" @click="duplicateFields()">Add Set</a>
+                    <a  v-if="setCount > 1" href="javascript:void(0);" @click="removeRecent()">Remove Most Recent Set</a>
+                </div>
+            </div>
+            <div class="liftlog-button-group">
+                <button type="submit" class="btn btn-liftlog" @click="checkForm()">Complete Entry</button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -21,7 +28,8 @@
     export default {
         data: function() {
             return {
-                setCount: 1
+                setCount: 1,
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         },
         props: {
@@ -36,11 +44,12 @@
                 let nextSet = previousSet.cloneNode(true);
                 this.setCount++;
                 nextSet.id = this.setCount;
+                console.log(nextSet["children"])
                 nextSet["children"][0].innerText = "Set" + this.setCount;
-                nextSet["children"][1].value = "";
-                nextSet["children"][1].name = "weight_" + this.setCount;
                 nextSet["children"][2].value = "";
-                nextSet["children"][2].name = "reps_" + this.setCount;
+                nextSet["children"][2].name = "weight_" + this.setCount;
+                nextSet["children"][4].value = "";
+                nextSet["children"][4].name = "reps_" + this.setCount;
                 previousSet.parentNode.insertBefore(nextSet, previousSet.nextSibling);
 
             },

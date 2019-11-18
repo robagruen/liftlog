@@ -16,14 +16,13 @@
             </a>
         @endforeach
         </div>
-        <div class="text-center mt-5">
-            <a href="/add-category" class="btn btn-liftlog">Add Category</a>
-        </div>
     @else
         <div class="text-center">
             <p>You have no categories</p>
-            <a href="/add-category" class="btn btn-liftlog">Add Category</a>
         </div>
     @endif
+    <div class="liftlog-button-group">
+        <a href="/add-category" class="btn btn-liftlog">Add Category</a>
+    </div>
 
 @endsection

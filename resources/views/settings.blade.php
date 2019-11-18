@@ -2,9 +2,8 @@
 
 @section('content')
 
-    <h1 class="mb-5">Settings</h1>
     @if ($exercises)
-        <h2 class="mb-3">Exercises</h2>
+        <h1 class="mb-3">Exercises</h1>
         <div class="liftlog-list">
         @foreach ($exercises as $exercise)
             <a href="/single-exercise/{{$exercise->id}}/" class="liftlog-list-item">
@@ -34,7 +33,7 @@
     @endif
 
     @if ($categories)
-        <h2 class="mb-3 mt-5">Categories</h2>
+        <h1 class="mb-3 mt-5">Categories</h1>
         <div class="liftlog-list">
             @foreach ($categories as $i => $category)
                 <a href="/categories/single-category/{{ $category->id }}/" class="liftlog-list-item">

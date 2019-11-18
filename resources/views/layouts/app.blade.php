@@ -35,10 +35,10 @@
                 name="{{ Auth::user()->name }}"
             ></header-component>
         @endguest
-        <main class="my-3">
+        <main class="">
             <div class="container single-exercise">
                 <div class="row justify-content-center">
-                    <div class="col-sm-12 col-md-8 col-lg-6">
+                    <div class="col-sm-12 col-md-7 col-lg-5">
                         @yield('content')
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="header-component-container">
         <nav class="navbar">
             <div class="container">
-                <div>
-                    <a class="logo" href="/">
-                        <img src="/images/liftlog-logo.svg" alt="Liftlog logo" class="logo-liftlog">
+                <div class="logo-icon-container">
+                    <a href="/">
+                        <img src="/images/dumbell.svg" alt="Liftlog logo" class="dumbell-icon">
                     </a>
-                    <span>Login</span>
+                    <span class="page-title">Login</span>
                 </div>
                 <button class="navbar-toggler hamburger hamburger--spin" id="hamburger" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" @click="animateHamburger()">
                     <span class="hamburger-box">
@@ -16,7 +16,7 @@
             </div>
         </nav>
         <div class="collapse" id="navbarToggleExternalContent">
-            <div class="container">
+            <div class="container collapse-container">
                 <ul v-if="auth == false" class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/login/">Login</a>

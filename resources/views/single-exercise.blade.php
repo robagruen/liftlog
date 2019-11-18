@@ -34,9 +34,11 @@
             @endforeach
         </div>
     @else
-        <p class="text-center">You have no entries</p>
+        <div class="text-center">
+            <p>You have no entries</p>
+        </div>
     @endif
-    <div class="btn-row">
+    <div class="liftlog-button-group">
         <a class="btn btn-liftlog" href="/single-exercise/{{ $exercise->id }}/add-entry">Add entry</a>
     </div>
 

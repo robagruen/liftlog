@@ -11,8 +11,9 @@
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <div class="form-group">
-            <input id="email" type="email" class="liftlog-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-Mail">
+        <div class="liftlog-form-group">
+            <label for="email" class="liftlog-label">Email</label>
+            <input id="email" type="email" class="liftlog-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -20,7 +21,7 @@
             @enderror
         </div>
 
-        <div class="form-group">
+        <div class="liftlog-button-group">
             <button type="submit" class="btn btn-liftlog">
                 {{ __('Send Password Reset Link') }}
             </button>

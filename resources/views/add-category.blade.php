@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-        <h2>Add New Category</h2>
 
         <form method="POST" action="/add-category">
-            <div class="form-group">
-                <input type="text" name="name" class="form-control" />
+            <div class="liftlog-form-group">
+                <label class="liftlog-label" for="name">Category Name</label>
+                <input type="text" name="name" id="name" class="liftlog-input" />
             </div>
-            <div class="form-group">
+            <div class="liftlog-button-group">
                 <button type="submit" class="btn btn-liftlog">Add Category</button>
             </div>
             {{ csrf_field() }}
         </form>
+
 @endsection

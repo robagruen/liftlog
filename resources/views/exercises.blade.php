@@ -22,13 +22,15 @@
             </a>
         @endforeach
         </div>
-        <div class="text-center mt-5">
-            <a href="/add-exercise" class="btn btn-primary btn-liftlog">Add Exercise</a>
+        <div class="liftlog-button-group">
+            <a href="/add-exercise" class="btn btn-liftlog">Add Exercise</a>
         </div>
     @else
         <div class="text-center">
             <p>You have no exercises</p>
-            <a href="/add-exercise" class="btn btn-primary btn-liftlog">Add Exercise</a>
+        </div>
+        <div class="liftlog-button-group">
+            <a href="/add-exercise" class="btn btn-liftlog">Add Exercise</a>
         </div>
     @endif
 

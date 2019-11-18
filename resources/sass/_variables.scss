@@ -23,14 +23,22 @@ $color-deepfuchsia: #B10C4B;
 $color-disabledfuchsia: #E43F7E;
 $color-white: #ffffff;
 $color-darkgray: #333333;
+$color-anothergray: #999999;
 $color-lightgray: hsla(0, 0%, 40%, 0.5);
 $color-lightergray: hsla(0, 0%, 78.8%, 1);
 $color-lightestgray: rgba(200, 200, 200, 0.5);
 
 // Screen Sizes
+$xs: 576px;
 $sm: 768px;
 $md: 991px;
 $lg: 1200px;
+
+@mixin xs {
+    @media (min-width: $xs) {
+        @content
+    }
+}
 
 @mixin sm {
     @media (min-width: $sm) {

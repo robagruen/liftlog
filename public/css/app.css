@@ -87,6 +87,7 @@ hr {
 
 h1,
 h2,
+nav.navbar .logo-icon-container .page-title,
 h3,
 h4,
 h5,
@@ -379,6 +380,7 @@ template {
 
 h1,
 h2,
+nav.navbar .logo-icon-container .page-title,
 h3,
 h4,
 h5,
@@ -400,6 +402,7 @@ h1,
 }
 
 h2,
+nav.navbar .logo-icon-container .page-title,
 .h2 {
   font-size: 1.8rem;
 }
@@ -10583,12 +10586,14 @@ a.text-dark:focus {
 
   p,
   h2,
+  nav.navbar .logo-icon-container .page-title,
   h3 {
     orphans: 3;
     widows: 3;
   }
 
   h2,
+  nav.navbar .logo-icon-container .page-title,
   h3 {
     page-break-after: avoid;
   }
@@ -10647,6 +10652,7 @@ a.text-dark:focus {
 body {
   font-family: "Roboto", sans-serif;
   color: #ffffff;
+  padding-bottom: 40px;
   font-size: 16px;
 }
 
@@ -10672,7 +10678,8 @@ h1 {
   font-size: 24px;
 }
 
-h2 {
+h2,
+nav.navbar .logo-icon-container .page-title {
   font-size: 20px;
 }
 
@@ -10690,6 +10697,7 @@ p {
 
 h1,
 h2,
+nav.navbar .logo-icon-container .page-title,
 h3,
 h4 {
   font-weight: bold;
@@ -10697,6 +10705,7 @@ h4 {
 
 h1,
 h2,
+nav.navbar .logo-icon-container .page-title,
 h3,
 h4,
 p {
@@ -10706,6 +10715,7 @@ p {
 @media (prefers-color-scheme: light) {
   h1,
   h2,
+  nav.navbar .logo-icon-container .page-title,
   h3,
   h4,
   p {
@@ -10746,6 +10756,10 @@ label {
   transition: all 1s;
 }
 
+.header-component-container {
+  margin-bottom: 40px;
+}
+
 nav.navbar {
   padding-top: 0;
   padding-bottom: 0;
@@ -10757,9 +10771,18 @@ nav.navbar > .container {
   padding: 0;
 }
 
-nav.navbar .logo-liftlog {
-  width: 106px;
-  margin: 20px 0;
+nav.navbar .logo-icon-container {
+  padding: 25px 0;
+}
+
+nav.navbar .logo-icon-container .dumbell-icon {
+  width: 22px;
+  margin-bottom: 5px;
+}
+
+nav.navbar .logo-icon-container .page-title {
+  margin-bottom: 0;
+  margin-left: 10px;
 }
 
 nav.navbar .hamburger {
@@ -10796,6 +10819,12 @@ nav.navbar .hamburger.is-active .hamburger-inner,
 nav.navbar .hamburger.is-active .hamburger-inner::after,
 nav.navbar .hamburger.is-active .hamburger-inner::before {
   background-color: #E43F7E;
+}
+
+@media (min-width: 576px) {
+  #navbarToggleExternalContent .collapse-container {
+    padding: 0;
+  }
 }
 
 #navbarToggleExternalContent .nav-msg {
@@ -10835,7 +10864,29 @@ nav.navbar,
   }
 }
 
-.liftlog-input {
+.liftlog-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.liftlog-form-group .liftlog-label {
+  font-size: 12px;
+  margin-bottom: 0;
+  color: #999999;
+}
+
+.liftlog-form-group .liftlog-label-invisible {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.liftlog-form-group .liftlog-input {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -10849,37 +10900,43 @@ nav.navbar,
   border-bottom: solid 2px #E43F7E;
   width: 100%;
   background: transparent;
+  margin-bottom: 1rem;
   color: #ffffff;
   height: 40px;
 }
 
 @media (prefers-color-scheme: light) {
-  .liftlog-input {
+  .liftlog-form-group .liftlog-input {
     color: #333333;
   }
 }
 
 @media (prefers-color-scheme: light) {
-  .liftlog-input::-webkit-input-placeholder {
+  .liftlog-form-group .liftlog-input::-webkit-input-placeholder {
     color: rgba(102, 102, 102, 0.5);
     opacity: 1;
   }
-  .liftlog-input::-moz-placeholder {
+  .liftlog-form-group .liftlog-input::-moz-placeholder {
     color: rgba(102, 102, 102, 0.5);
     opacity: 1;
   }
-  .liftlog-input:-ms-input-placeholder {
+  .liftlog-form-group .liftlog-input:-ms-input-placeholder {
     color: rgba(102, 102, 102, 0.5);
     opacity: 1;
   }
-  .liftlog-input::-ms-input-placeholder {
+  .liftlog-form-group .liftlog-input::-ms-input-placeholder {
     color: rgba(102, 102, 102, 0.5);
     opacity: 1;
   }
-  .liftlog-input::placeholder {
+  .liftlog-form-group .liftlog-input::placeholder {
     color: rgba(102, 102, 102, 0.5);
     opacity: 1;
   }
+}
+
+.liftlog-button-group {
+  margin-top: 40px;
+  text-align: center;
 }
 
 .vertical-menu {
@@ -10921,6 +10978,15 @@ nav.navbar,
 
 .liftlog-list-subheading {
   text-transform: uppercase;
+}
+
+.liftlog-logo-container {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.liftlog-logo-container .liftlog-logo {
+  width: 200px;
 }
 
 .add-exercise {
@@ -10978,8 +11044,6 @@ nav.navbar,
 }
 
 .modify-set-count {
-  margin-top: 20px;
-  margin-bottom: 40px;
   text-align: left;
 }
 
