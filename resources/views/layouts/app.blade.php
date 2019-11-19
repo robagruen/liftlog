@@ -21,29 +21,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/hamburger.min.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
-        @guest
-            <header-component
-                v-bind:auth="false"
-                name=""
-            ></header-component>
-        @else
-            <header-component
-                v-bind:auth="true"
-                name="{{ Auth::user()->name }}"
-            ></header-component>
-        @endguest
-        <main class="">
-            <div class="container single-exercise">
-                <div class="row justify-content-center">
-                    <div class="col-sm-12 col-md-7 col-lg-5">
-                        @yield('content')
-                    </div>
-                </div>
-            </div>
-        </main>
+
+        @yield('content')
+
     </div>
 </body>
 <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>

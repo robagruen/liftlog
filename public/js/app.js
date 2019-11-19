@@ -1988,7 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     auth: Boolean,
-    pageTitle: String,
+    page_title: String,
     name: String
   },
   methods: {
@@ -37427,7 +37427,13 @@ var render = function() {
   return _c("div", { staticClass: "header-component-container" }, [
     _c("nav", { staticClass: "navbar" }, [
       _c("div", { staticClass: "container" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "logo-icon-container" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("span", { staticClass: "page-title" }, [
+            _vm._v(_vm._s(_vm.page_title))
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "button",
@@ -37518,15 +37524,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logo-icon-container" }, [
-      _c("a", { attrs: { href: "/" } }, [
-        _c("img", {
-          staticClass: "dumbell-icon",
-          attrs: { src: "/images/dumbell.svg", alt: "Liftlog logo" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "page-title" }, [_vm._v("Login")])
+    return _c("a", { attrs: { href: "/" } }, [
+      _c("img", {
+        staticClass: "dumbell-icon",
+        attrs: { src: "/images/dumbell.svg", alt: "Liftlog logo" }
+      })
     ])
   },
   function() {

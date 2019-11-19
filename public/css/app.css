@@ -10821,6 +10821,10 @@ nav.navbar .hamburger.is-active .hamburger-inner::before {
   background-color: #E43F7E;
 }
 
+#navbarToggleExternalContent {
+  padding-bottom: 10px;
+}
+
 @media (min-width: 576px) {
   #navbarToggleExternalContent .collapse-container {
     padding: 0;

@@ -6,7 +6,7 @@
                     <a href="/">
                         <img src="/images/dumbell.svg" alt="Liftlog logo" class="dumbell-icon">
                     </a>
-                    <span class="page-title">Login</span>
+                    <span class="page-title">{{ page_title }}</span>
                 </div>
                 <button class="navbar-toggler hamburger hamburger--spin" id="hamburger" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" @click="animateHamburger()">
                     <span class="hamburger-box">
@@ -57,7 +57,7 @@
         },
         props: {
             auth: Boolean,
-            pageTitle: String,
+            page_title: String,
             name: String
         },
         methods: {

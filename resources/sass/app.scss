@@ -138,6 +138,7 @@ nav.navbar {
 }
 
 #navbarToggleExternalContent {
+    padding-bottom: 10px;
     .collapse-container {
         @include xs {
             padding: 0;
