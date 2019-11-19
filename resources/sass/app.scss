@@ -298,6 +298,7 @@ nav.navbar, #navbarToggleExternalContent {
     &-container {
         .entry {
             &-time {
+                font-size: 14px;
                 color: $color-lightergray;
                 @include isLightMode {
                     color: $color-lightgray;

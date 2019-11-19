@@ -15,7 +15,7 @@
                 <form method="POST" action="/add-exercise">
                     <div class="liftlog-form-group">
                         <label for="name" class="liftlog-label">Exercise Name</label>
-                        <input type="text" name="name" id="name" class="liftlog-input" />
+                        <input type="text" name="name" id="name" class="liftlog-input" required />
                     </div>
                     <div class="liftlog-form-group">
                         <label class="liftlog-label">Exercise Categories</label>
@@ -40,5 +40,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("category_count").value = document.getElementsByClassName("category_checkboxes").length;
+        }
+    </script>
 
 @endsection

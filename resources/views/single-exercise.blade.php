@@ -21,7 +21,11 @@
                         @foreach ($entries as $entry)
                             <div class="entry">
                                 <div class="entry-time">
-                                    <strong>{{ date('F d, Y', strtotime($entry->updated_at)) }}</strong>
+                                    @if ($entry->entry_date)
+                                        <strong>{{ date('F d, Y', strtotime($entry->entry_date)) }}</strong>
+                                    @else
+                                        <strong>{{ date('F d, Y', strtotime($entry->updated_at)) }}</strong>
+                                    @endif
                                     <div class="dropdown">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="vertical-menu dropdown-toggle" data-toggle="dropdown">
                                             <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
@@ -43,6 +47,7 @@
                             </div>
                         @endforeach
                     </div>
+
                 @else
                     <div class="text-center">
                         <p>You have no entries</p>
@@ -51,6 +56,8 @@
                 <div class="liftlog-button-group">
                     <a class="btn btn-liftlog" href="/single-exercise/{{ $exercise->id }}/add-entry">Add entry</a>
                 </div>
+
+                <canvas id="myChart" width="400" height="400"></canvas>
 
             </div>
         </div>

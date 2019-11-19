@@ -1,12 +1,16 @@
 <template>
     <div>
         <form method="POST" action="/add-entry">
+            <div class="liftlog-form-group">
+                <label for="entry_date" class="liftlog-label">Entry Date (leave empty for current date)</label>
+                <input type="date" name="entry_date" id="entry_date" class="liftlog-input">
+            </div>
             <div class="liftlog-form-group entry" id="1">
                 <h4>Set 1</h4>
-                <label class="liftlog-label">Weight</label>
-                <input type="text" name="weight_1" class="liftlog-input weight" maxlength="5" required />
-                <label class="liftlog-label">Reps</label>
-                <input type="text" name="reps_1" class="liftlog-input reps" maxlength="3" required />
+                <label for="weight_1" class="liftlog-label">Weight</label>
+                <input type="text" name="weight_1" id="weight_1" class="liftlog-input weight" maxlength="5" required />
+                <label for="reps_1" class="liftlog-label">Reps</label>
+                <input type="text" name="reps_1" id="reps_1" class="liftlog-input reps" maxlength="3" required />
             </div>
             <div class="liftlog-form-group">
                 <input type="hidden" name="set_count" id="set-count" v-bind:value="setCount">
@@ -46,10 +50,14 @@
                 nextSet.id = this.setCount;
                 console.log(nextSet["children"])
                 nextSet["children"][0].innerText = "Set" + this.setCount;
+                nextSet["children"][1].htmlFor = "weight_" + this.setCount;
                 nextSet["children"][2].value = "";
                 nextSet["children"][2].name = "weight_" + this.setCount;
+                nextSet["children"][2].id = "weight_" + this.setCount;
+                nextSet["children"][3].htmlFor = "reps_" + this.setCount;
                 nextSet["children"][4].value = "";
                 nextSet["children"][4].name = "reps_" + this.setCount;
+                nextSet["children"][4].id = "reps_" + this.setCount;
                 previousSet.parentNode.insertBefore(nextSet, previousSet.nextSibling);
 
             },

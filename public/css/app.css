@@ -11017,6 +11017,7 @@ nav.navbar,
 }
 
 .single-exercise-container .entry-time {
+  font-size: 14px;
   color: #c9c9c9;
   margin-bottom: 10px;
   line-height: 19px;

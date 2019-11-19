@@ -21,7 +21,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/hamburger.min.css') }}" rel="stylesheet">
-
 </head>
 <body>
     <div id="app">
@@ -30,5 +29,4 @@
 
     </div>
 </body>
-<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 </html>

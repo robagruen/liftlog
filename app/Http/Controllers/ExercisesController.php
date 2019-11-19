@@ -61,14 +61,22 @@ class ExercisesController extends Controller
         // This view has the exercise object
         if (Auth::check() && Auth::id() == $exercise->user_id)
         {
-            $entries = Entry::where('exercise_id', $exercise->id)->latest()->getModels();
+            $entries = Entry::where('exercise_id', $exercise->id)->orderBy('entry_date', 'desc')->getModels();
             $sets = Set::where('exercise_id', $exercise->id)->getModels();
             $highest_weight = 0;
             $top_entry_info = array();
             foreach ($sets as $set):
                 if ($set->weight > $highest_weight):
                     $highest_weight = $set->weight;
-                    $time = date('F d, Y', strtotime($set->updated_at));
+                    $entry = Entry::where('id', $set->exercise_entry_id)->getModels();
+                    foreach ($entry as $e):
+                        if ($e->entry_date) {
+                            $time = date('F d, Y', strtotime($e->entry_date));
+                        }
+                        else {
+                            $time = date('F d, Y', strtotime($set->updated_at));
+                        }
+                    endforeach;
                     $top_entry_info = array('weight' => $highest_weight, 'time' => $time);
                 endif;
             endforeach;
@@ -92,6 +100,13 @@ class ExercisesController extends Controller
     public function addEntry(Request $request) {
         if (Auth::check()) {
             $entry = new Entry();
+            if ($request->entry_date) {
+                $entry->entry_date = $request->entry_date;
+            }
+            else {
+                $entry->entry_date = date('Y-m-d');
+                Log::info(date('Y-m-d'));
+            }
             $entry->exercise_id = $request->exercise_id;
             $set_count = $request->set_count;
             $entry->save();

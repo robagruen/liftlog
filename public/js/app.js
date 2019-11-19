@@ -1864,6 +1864,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1885,10 +1889,14 @@ __webpack_require__.r(__webpack_exports__);
       nextSet.id = this.setCount;
       console.log(nextSet["children"]);
       nextSet["children"][0].innerText = "Set" + this.setCount;
+      nextSet["children"][1].htmlFor = "weight_" + this.setCount;
       nextSet["children"][2].value = "";
       nextSet["children"][2].name = "weight_" + this.setCount;
+      nextSet["children"][2].id = "weight_" + this.setCount;
+      nextSet["children"][3].htmlFor = "reps_" + this.setCount;
       nextSet["children"][4].value = "";
       nextSet["children"][4].name = "reps_" + this.setCount;
+      nextSet["children"][4].id = "reps_" + this.setCount;
       previousSet.parentNode.insertBefore(nextSet, previousSet.nextSibling);
     },
     removeRecent: function removeRecent() {
@@ -37305,6 +37313,8 @@ var render = function() {
     _c("form", { attrs: { method: "POST", action: "/add-entry" } }, [
       _vm._m(0),
       _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
       _c("div", { staticClass: "liftlog-form-group" }, [
         _c("input", {
           attrs: { type: "hidden", name: "set_count", id: "set-count" },
@@ -37375,29 +37385,61 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "liftlog-form-group" }, [
+      _c(
+        "label",
+        { staticClass: "liftlog-label", attrs: { for: "entry_date" } },
+        [_vm._v("Entry Date (leave empty for current date)")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "liftlog-input",
+        attrs: { type: "date", name: "entry_date", id: "entry_date" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "liftlog-form-group entry", attrs: { id: "1" } },
       [
         _c("h4", [_vm._v("Set 1")]),
         _vm._v(" "),
-        _c("label", { staticClass: "liftlog-label" }, [_vm._v("Weight")]),
+        _c(
+          "label",
+          { staticClass: "liftlog-label", attrs: { for: "weight_1" } },
+          [_vm._v("Weight")]
+        ),
         _vm._v(" "),
         _c("input", {
           staticClass: "liftlog-input weight",
           attrs: {
             type: "text",
             name: "weight_1",
+            id: "weight_1",
             maxlength: "5",
             required: ""
           }
         }),
         _vm._v(" "),
-        _c("label", { staticClass: "liftlog-label" }, [_vm._v("Reps")]),
+        _c(
+          "label",
+          { staticClass: "liftlog-label", attrs: { for: "reps_1" } },
+          [_vm._v("Reps")]
+        ),
         _vm._v(" "),
         _c("input", {
           staticClass: "liftlog-input reps",
-          attrs: { type: "text", name: "reps_1", maxlength: "3", required: "" }
+          attrs: {
+            type: "text",
+            name: "reps_1",
+            id: "reps_1",
+            maxlength: "3",
+            required: ""
+          }
         })
       ]
     )
