@@ -254,9 +254,14 @@ nav.navbar, #navbarToggleExternalContent {
     }
     &-heading {
         color: $color-fuchsia;
+        margin-bottom: 5px;
     }
     &-subheading {
         text-transform: uppercase;
+        margin-bottom: 0px;
+    }
+    hr {
+        margin: 0.75rem 0;
     }
 }
 
@@ -334,5 +339,13 @@ nav.navbar, #navbarToggleExternalContent {
     }
     &::after {
         clear: both;
+    }
+}
+
+
+// Settings
+.settings {
+    .dropdown {
+        bottom: 27px;
     }
 }

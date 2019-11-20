@@ -10978,10 +10978,16 @@ nav.navbar,
 
 .liftlog-list-heading {
   color: #E43F7E;
+  margin-bottom: 5px;
 }
 
 .liftlog-list-subheading {
   text-transform: uppercase;
+  margin-bottom: 0px;
+}
+
+.liftlog-list hr {
+  margin: 0.75rem 0;
 }
 
 .liftlog-logo-container {
@@ -11058,5 +11064,9 @@ nav.navbar,
 
 .modify-set-count::after {
   clear: both;
+}
+
+.settings .dropdown {
+  bottom: 27px;
 }
 

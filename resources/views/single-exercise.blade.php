@@ -57,8 +57,6 @@
                     <a class="btn btn-liftlog" href="/single-exercise/{{ $exercise->id }}/add-entry">Add entry</a>
                 </div>
 
-                <canvas id="myChart" width="400" height="400"></canvas>
-
             </div>
         </div>
     </div>

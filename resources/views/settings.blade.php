@@ -8,7 +8,7 @@
         page_title="Settings"
     ></header-component>
 
-    <div class="container single-exercise">
+    <div class="container settings">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-7 col-lg-5">
 
