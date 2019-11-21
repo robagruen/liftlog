@@ -20,7 +20,7 @@ class CreateExerciseEntrySetsTable extends Migration
             $table->foreign('exercise_id')->references('id')->on('exercises');
             $table->unsignedBigInteger('exercise_entry_id');
             $table->foreign('exercise_entry_id')->references('id')->on('exercise_entries');
-            $table->double('weight', 4, 1);
+            $table->double('weight', 5, 1);
             $table->integer('repetitions');
             $table->timestamps();
         });
