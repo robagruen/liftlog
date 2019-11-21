@@ -14,6 +14,7 @@ class ModifyExercisesTable extends Migration
     public function up()
     {
         Schema::create('exercise_entry_sets', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->double('weight', 5, 1)->change();
         });
     }
