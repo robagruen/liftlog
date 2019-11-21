@@ -11066,7 +11066,12 @@ nav.navbar,
   clear: both;
 }
 
+.settings .liftlog-list-heading {
+  position: relative;
+  top: 7px;
+}
+
 .settings .dropdown {
-  bottom: 27px;
+  bottom: 22px;
 }
 

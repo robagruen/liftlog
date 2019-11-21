@@ -1,9 +1,10 @@
 <template>
     <div>
-        <form method="POST" action="/add-entry">
+        <form method="POST" action="/add-entry" @submit="checkForm">
             <div class="liftlog-form-group">
                 <label for="entry_date" class="liftlog-label">Entry Date (leave empty for current date)</label>
-                <input type="date" name="entry_date" id="entry_date" class="liftlog-input">
+                <input type="date" name="entry_date" id="entry_date" class="liftlog-input" placeholder="yyyy-mm-dd">
+                <div v-if="errors">{{ errors }}</div>
             </div>
             <div class="liftlog-form-group entry" id="1">
                 <h4>Set 1</h4>
@@ -22,7 +23,7 @@
                 </div>
             </div>
             <div class="liftlog-button-group">
-                <button type="submit" class="btn btn-liftlog" @click="checkForm()">Complete Entry</button>
+                <button type="submit" class="btn btn-liftlog">Complete Entry</button>
             </div>
         </form>
     </div>
@@ -33,7 +34,8 @@
         data: function() {
             return {
                 setCount: 1,
-                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                errors: ""
             }
         },
         props: {
@@ -66,27 +68,18 @@
                 recentSet.remove();
                 this.setCount--;
             },
-            checkForm: function() {
-                let weights = document.getElementsByClassName("weight");
-                for (let i = 0; i <= weights.length; i++) {
-                    let weight = weights[i];
+            checkForm: function(e) {
+                // Checking Entry Date field
+                let entry_date = document.getElementById("entry_date");
+                if (moment(entry_date.value, 'YYYY-MM-DD',true).isValid() == true || entry_date.value == "") {
+                    console.log("valid");
+                }
+                else {
+                    this.errors = "Invalid date.  Format (YYYY-MM-DD)";
+                    e.preventDefault();
                 }
 
-                let reps = document.getElementsByClassName("reps");
-                let rep;
-                for (let i = 0; i <= reps.length; i++) {
-                    rep = reps[i];
-                    if (Number.isInteger(parseInt(rep.value))) {
-                        //console.log(typeof(parseInt(reps.value)));
-                        //console.log("yes");
-                    }
-                    else {
-                        return false;
-                    }
-                }
-
-
-
+                // Checking to make sure weight inputs have numbers
             }
         }
     }

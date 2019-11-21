@@ -1868,11 +1868,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       setCount: 1,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      errors: ""
     };
   },
   props: {
@@ -1904,25 +1906,17 @@ __webpack_require__.r(__webpack_exports__);
       recentSet.remove();
       this.setCount--;
     },
-    checkForm: function checkForm() {
-      var weights = document.getElementsByClassName("weight");
+    checkForm: function checkForm(e) {
+      // Checking Entry Date field
+      var entry_date = document.getElementById("entry_date");
 
-      for (var i = 0; i <= weights.length; i++) {
-        var weight = weights[i];
-      }
+      if (moment(entry_date.value, 'YYYY-MM-DD', true).isValid() == true || entry_date.value == "") {
+        console.log("valid");
+      } else {
+        this.errors = "Invalid date.  Format (YYYY-MM-DD)";
+        e.preventDefault();
+      } // Checking to make sure weight inputs have numbers
 
-      var reps = document.getElementsByClassName("reps");
-      var rep;
-
-      for (var _i = 0; _i <= reps.length; _i++) {
-        rep = reps[_i];
-
-        if (Number.isInteger(parseInt(rep.value))) {//console.log(typeof(parseInt(reps.value)));
-          //console.log("yes");
-        } else {
-          return false;
-        }
-      }
     }
   }
 });
@@ -37310,94 +37304,88 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { attrs: { method: "POST", action: "/add-entry" } }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "liftlog-form-group" }, [
-        _c("input", {
-          attrs: { type: "hidden", name: "set_count", id: "set-count" },
-          domProps: { value: _vm.setCount }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "hidden", name: "exercise_id", id: "exercise-id" },
-          domProps: { value: _vm.exercise_id }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.csrf }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "modify-set-count" }, [
+    _c(
+      "form",
+      {
+        attrs: { method: "POST", action: "/add-entry" },
+        on: { submit: _vm.checkForm }
+      },
+      [
+        _c("div", { staticClass: "liftlog-form-group" }, [
           _c(
-            "a",
-            {
-              attrs: { href: "javascript:void(0);" },
-              on: {
-                click: function($event) {
-                  return _vm.duplicateFields()
-                }
-              }
-            },
-            [_vm._v("Add Set")]
+            "label",
+            { staticClass: "liftlog-label", attrs: { for: "entry_date" } },
+            [_vm._v("Entry Date (leave empty for current date)")]
           ),
           _vm._v(" "),
-          _vm.setCount > 1
-            ? _c(
-                "a",
-                {
-                  attrs: { href: "javascript:void(0);" },
-                  on: {
-                    click: function($event) {
-                      return _vm.removeRecent()
-                    }
-                  }
-                },
-                [_vm._v("Remove Most Recent Set")]
-              )
-            : _vm._e()
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "liftlog-button-group" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-liftlog",
-            attrs: { type: "submit" },
-            on: {
-              click: function($event) {
-                return _vm.checkForm()
-              }
+          _c("input", {
+            staticClass: "liftlog-input",
+            attrs: {
+              type: "date",
+              name: "entry_date",
+              id: "entry_date",
+              placeholder: "yyyy-mm-dd"
             }
-          },
-          [_vm._v("Complete Entry")]
-        )
-      ])
-    ])
+          }),
+          _vm._v(" "),
+          _vm.errors ? _c("div", [_vm._v(_vm._s(_vm.errors))]) : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "liftlog-form-group" }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "set_count", id: "set-count" },
+            domProps: { value: _vm.setCount }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "exercise_id", id: "exercise-id" },
+            domProps: { value: _vm.exercise_id }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "modify-set-count" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "javascript:void(0);" },
+                on: {
+                  click: function($event) {
+                    return _vm.duplicateFields()
+                  }
+                }
+              },
+              [_vm._v("Add Set")]
+            ),
+            _vm._v(" "),
+            _vm.setCount > 1
+              ? _c(
+                  "a",
+                  {
+                    attrs: { href: "javascript:void(0);" },
+                    on: {
+                      click: function($event) {
+                        return _vm.removeRecent()
+                      }
+                    }
+                  },
+                  [_vm._v("Remove Most Recent Set")]
+                )
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "liftlog-form-group" }, [
-      _c(
-        "label",
-        { staticClass: "liftlog-label", attrs: { for: "entry_date" } },
-        [_vm._v("Entry Date (leave empty for current date)")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "liftlog-input",
-        attrs: { type: "date", name: "entry_date", id: "entry_date" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37443,6 +37431,18 @@ var staticRenderFns = [
         })
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "liftlog-button-group" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-liftlog", attrs: { type: "submit" } },
+        [_vm._v("Complete Entry")]
+      )
+    ])
   }
 ]
 render._withStripped = true

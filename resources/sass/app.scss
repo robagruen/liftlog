@@ -345,7 +345,11 @@ nav.navbar, #navbarToggleExternalContent {
 
 // Settings
 .settings {
+    .liftlog-list-heading {
+        position: relative;
+        top: 7px;
+    }
     .dropdown {
-        bottom: 27px;
+        bottom: 22px;
     }
 }
