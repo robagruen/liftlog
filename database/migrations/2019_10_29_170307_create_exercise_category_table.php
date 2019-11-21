@@ -14,6 +14,7 @@ class CreateExerciseCategoryTable extends Migration
     public function up()
     {
         Schema::create('exercise_category', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

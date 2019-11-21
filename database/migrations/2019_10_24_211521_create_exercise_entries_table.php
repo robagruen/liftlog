@@ -14,6 +14,7 @@ class CreateExerciseEntriesTable extends Migration
     public function up()
     {
         Schema::create('exercise_entries', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->unsignedBigInteger('exercise_id');
             $table->foreign('exercise_id')->references('id')->on('exercises');

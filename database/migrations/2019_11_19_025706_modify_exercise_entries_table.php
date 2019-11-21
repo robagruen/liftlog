@@ -14,6 +14,7 @@ class ModifyExerciseEntriesTable extends Migration
     public function up()
     {
         Schema::table('exercise_entries', function (Blueprint $table) {
+             $table->engine = 'InnoDB';
             $table->date('entry_date')->nullable(true);
         });
     }
