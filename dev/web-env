@@ -1,0 +1,13 @@
+APP_NAME=lift
+APP_ENV=local
+APP_KEY=base64:pVFPKAYwIYV0v9OYXUV0J4fNMGfxOXHaPbyl7X0k1pU=
+APP_DEBUG=true
+APP_URL=http://liftlog.us
+
+
+DB_CONNECTION=mysql
+DB_HOST=database-1.cooufkllkjho.us-east-2.rds.amazonaws.com
+DB_PORT=3306
+DB_DATABASE=Lift
+DB_USERNAME=roob
+DB_PASSWORD=Liftlogs!7667
