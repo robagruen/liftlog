@@ -40,7 +40,7 @@
                                 </div>
                                 @foreach ($sets as $set)
                                     @if ($set->exercise_entry_id == $entry->id)
-                                        <p class="entry-info">{{$set->weight}} llbs. x {{$set->repetitions}}</p>
+                                        <p class="entry-info">{{$set->weight}} lbs. x {{$set->repetitions}}</p>
                                     @endif
                                 @endforeach
                                 <hr>

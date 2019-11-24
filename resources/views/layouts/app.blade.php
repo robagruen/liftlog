@@ -29,5 +29,5 @@
 
     </div>
 </body>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
+<script src="{{ asset('js/moment.js') }}"></script>
 </html>
