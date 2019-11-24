@@ -1869,12 +1869,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       setCount: 1,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      errors: ""
+      date_error: "",
+      weight_error: "",
+      rep_error: ""
     };
   },
   props: {
@@ -1890,7 +1897,7 @@ __webpack_require__.r(__webpack_exports__);
       this.setCount++;
       nextSet.id = this.setCount;
       console.log(nextSet["children"]);
-      nextSet["children"][0].innerText = "Set" + this.setCount;
+      nextSet["children"][0].innerText = "Set " + this.setCount;
       nextSet["children"][1].htmlFor = "weight_" + this.setCount;
       nextSet["children"][2].value = "";
       nextSet["children"][2].name = "weight_" + this.setCount;
@@ -1911,12 +1918,42 @@ __webpack_require__.r(__webpack_exports__);
       var entry_date = document.getElementById("entry_date");
 
       if (moment(entry_date.value, 'YYYY-MM-DD', true).isValid() == true || entry_date.value == "") {
-        console.log("valid");
+        this.date_error = "";
       } else {
-        this.errors = "Invalid date.  Format (YYYY-MM-DD)";
+        this.date_error = "Invalid date.  Format (YYYY-MM-DD)";
         e.preventDefault();
       } // Checking to make sure weight inputs have numbers
 
+
+      var weights = document.getElementsByClassName("weight");
+
+      for (var i = 0; i < weights.length; i++) {
+        var weight = weights[i];
+
+        if (isNaN(weight.value)) {
+          e.preventDefault();
+          this.weight_error = "Detected an invalid value for a weight input.";
+        } else if (weight.value > 999) {
+          e.preventDefault();
+          this.weight_error = "Detected an invalid value for a weight input.";
+        } else {
+          this.weight_error = "";
+        }
+      } // Checking to make sure reps inputs also have numbers
+
+
+      var reps = document.getElementsByClassName("reps");
+
+      for (var _i = 0; _i < reps.length; _i++) {
+        var rep = reps[_i];
+
+        if (isNaN(rep.value)) {
+          e.preventDefault();
+          this.rep_error = "Detected an invalid value for a repetitions input.";
+        } else {
+          this.rep_error = "";
+        }
+      }
     }
   }
 });
@@ -37311,27 +37348,27 @@ var render = function() {
         on: { submit: _vm.checkForm }
       },
       [
-        _c("div", { staticClass: "liftlog-form-group" }, [
-          _c(
-            "label",
-            { staticClass: "liftlog-label", attrs: { for: "entry_date" } },
-            [_vm._v("Entry Date (leave empty for current date)")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "liftlog-input",
-            attrs: {
-              type: "date",
-              name: "entry_date",
-              id: "entry_date",
-              placeholder: "yyyy-mm-dd"
-            }
-          }),
-          _vm._v(" "),
-          _vm.errors ? _c("div", [_vm._v(_vm._s(_vm.errors))]) : _vm._e()
-        ]),
+        _vm.date_error || _vm.weight_error || _vm.rep_error
+          ? _c("div", { staticClass: "errors-container" }, [
+              _c("h4", [_vm._v("Errors")]),
+              _vm._v(" "),
+              _vm.date_error
+                ? _c("div", [_vm._v(_vm._s(_vm.date_error))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.weight_error
+                ? _c("div", [_vm._v(_vm._s(_vm.weight_error))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.rep_error
+                ? _c("div", [_vm._v(_vm._s(_vm.rep_error))])
+                : _vm._e()
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "liftlog-form-group" }, [
           _c("input", {
@@ -37380,12 +37417,35 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(2)
       ]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "liftlog-form-group" }, [
+      _c(
+        "label",
+        { staticClass: "liftlog-label", attrs: { for: "entry_date" } },
+        [_vm._v("Entry Date (leave empty for current date)")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "liftlog-input",
+        attrs: {
+          type: "date",
+          name: "entry_date",
+          id: "entry_date",
+          placeholder: "yyyy-mm-dd",
+          autocomplete: "off"
+        }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37409,7 +37469,8 @@ var staticRenderFns = [
             name: "weight_1",
             id: "weight_1",
             maxlength: "5",
-            required: ""
+            required: "",
+            autocomplete: "off"
           }
         }),
         _vm._v(" "),
@@ -37426,7 +37487,8 @@ var staticRenderFns = [
             name: "reps_1",
             id: "reps_1",
             maxlength: "3",
-            required: ""
+            required: "",
+            autocomplete: "off"
           }
         })
       ]

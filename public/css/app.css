@@ -11066,6 +11066,14 @@ nav.navbar,
   clear: both;
 }
 
+.errors-container {
+  margin-bottom: 2rem;
+}
+
+.errors-container div {
+  color: #e3342f;
+}
+
 .settings .liftlog-list-heading {
   position: relative;
   top: 7px;

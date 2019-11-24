@@ -1,17 +1,22 @@
 <template>
     <div>
         <form method="POST" action="/add-entry" @submit="checkForm">
+            <div v-if="date_error || weight_error || rep_error" class="errors-container">
+                <h4>Errors</h4>
+                <div v-if="date_error">{{ date_error }}</div>
+                <div v-if="weight_error">{{ weight_error }}</div>
+                <div v-if="rep_error">{{ rep_error }}</div>
+            </div>
             <div class="liftlog-form-group">
                 <label for="entry_date" class="liftlog-label">Entry Date (leave empty for current date)</label>
-                <input type="date" name="entry_date" id="entry_date" class="liftlog-input" placeholder="yyyy-mm-dd">
-                <div v-if="errors">{{ errors }}</div>
+                <input type="date" name="entry_date" id="entry_date" class="liftlog-input" placeholder="yyyy-mm-dd" autocomplete="off">
             </div>
             <div class="liftlog-form-group entry" id="1">
                 <h4>Set 1</h4>
                 <label for="weight_1" class="liftlog-label">Weight</label>
-                <input type="text" name="weight_1" id="weight_1" class="liftlog-input weight" maxlength="5" required />
+                <input type="text" name="weight_1" id="weight_1" class="liftlog-input weight" maxlength="5" required autocomplete="off" />
                 <label for="reps_1" class="liftlog-label">Reps</label>
-                <input type="text" name="reps_1" id="reps_1" class="liftlog-input reps" maxlength="3" required />
+                <input type="text" name="reps_1" id="reps_1" class="liftlog-input reps" maxlength="3" required autocomplete="off" />
             </div>
             <div class="liftlog-form-group">
                 <input type="hidden" name="set_count" id="set-count" v-bind:value="setCount">
@@ -35,7 +40,9 @@
             return {
                 setCount: 1,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                errors: ""
+                date_error: "",
+                weight_error: "",
+                rep_error: ""
             }
         },
         props: {
@@ -51,7 +58,7 @@
                 this.setCount++;
                 nextSet.id = this.setCount;
                 console.log(nextSet["children"])
-                nextSet["children"][0].innerText = "Set" + this.setCount;
+                nextSet["children"][0].innerText = "Set " + this.setCount;
                 nextSet["children"][1].htmlFor = "weight_" + this.setCount;
                 nextSet["children"][2].value = "";
                 nextSet["children"][2].name = "weight_" + this.setCount;
@@ -72,14 +79,42 @@
                 // Checking Entry Date field
                 let entry_date = document.getElementById("entry_date");
                 if (moment(entry_date.value, 'YYYY-MM-DD',true).isValid() == true || entry_date.value == "") {
-                    console.log("valid");
+                    this.date_error = "";
                 }
                 else {
-                    this.errors = "Invalid date.  Format (YYYY-MM-DD)";
+                    this.date_error = "Invalid date.  Format (YYYY-MM-DD)";
                     e.preventDefault();
                 }
 
                 // Checking to make sure weight inputs have numbers
+                let weights = document.getElementsByClassName("weight");
+                for (let i = 0; i < weights.length; i++) {
+                    let weight = weights[i];
+                    if (isNaN(weight.value)) {
+                        e.preventDefault();
+                        this.weight_error = "Detected an invalid value for a weight input.";
+                    }
+                    else if (weight.value > 999) {
+                        e.preventDefault();
+                        this.weight_error = "Detected an invalid value for a weight input.";
+                    }
+                    else {
+                        this.weight_error = "";
+                    }
+                }
+
+                // Checking to make sure reps inputs also have numbers
+                let reps = document.getElementsByClassName("reps");
+                for (let i = 0; i < reps.length; i++) {
+                    let rep = reps[i];
+                    if (isNaN(rep.value)) {
+                        e.preventDefault();
+                        this.rep_error = "Detected an invalid value for a repetitions input.";
+                    }
+                    else {
+                        this.rep_error = "";
+                    }
+                }
             }
         }
     }

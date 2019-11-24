@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-7 col-lg-5">
 
-                <add-entry-form exercise_id="{{ $exercise }}"></add-entry-form>
+                <add-entry-form v-bind:exercise_id="{{ $exercise }}"></add-entry-form>
 
             </div>
         </div>

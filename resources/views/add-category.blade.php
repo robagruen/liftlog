@@ -15,7 +15,7 @@
                 <form method="POST" action="/add-category">
                     <div class="liftlog-form-group">
                         <label class="liftlog-label" for="name">Category Name</label>
-                        <input type="text" name="name" id="name" class="liftlog-input" required />
+                        <input type="text" name="name" id="name" class="liftlog-input" required autocomplete="off" />
                     </div>
                     <div class="liftlog-button-group">
                         <button type="submit" class="btn btn-liftlog">Add Category</button>

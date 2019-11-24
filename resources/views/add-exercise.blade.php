@@ -15,7 +15,7 @@
                 <form method="POST" action="/add-exercise">
                     <div class="liftlog-form-group">
                         <label for="name" class="liftlog-label">Exercise Name</label>
-                        <input type="text" name="name" id="name" class="liftlog-input" required />
+                        <input type="text" name="name" id="name" class="liftlog-input" required autocomplete="off" />
                     </div>
                     <div class="liftlog-form-group">
                         <label class="liftlog-label">Exercise Categories</label>
