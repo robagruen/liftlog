@@ -30,4 +30,5 @@
     </div>
 </body>
 <script src="{{ asset('js/moment.js') }}"></script>
+<script src="{{ asset('js/exercises.js') }}"></script>
 </html>
