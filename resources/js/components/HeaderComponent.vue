@@ -34,6 +34,9 @@
                         <a class="nav-link" href="/categories/">Categories</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/calories/">Calories</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/settings/">Settings</a>
                     </li>
                     <li class="nav-item">

@@ -32,3 +32,7 @@ Route::get('/categories/single-category/{category}/', 'ExercisesController@viewS
 Route::get('/settings/', 'ExercisesController@viewSettings');
 Route::post('/settings/delete-exercise/{exercise}', 'ExercisesController@deleteExercise');
 Route::post('/settings/delete-category/{category}', 'ExercisesController@deleteCategory');
+
+Route::get('/calories/', 'CaloriesController@viewCalories');
+Route::get('/add-calories-entry/', 'CaloriesController@viewAddCaloriesEntry');
+Route::get('/calories/{calorie}/', 'CaloriesController@viewSingleCaloriesEntry');
